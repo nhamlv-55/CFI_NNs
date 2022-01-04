@@ -1,0 +1,9 @@
+* exp
+n_train: 60000 n_test: 10000
+|layers             | n Relu | train unique paths | test unique paths | common paths
+|conv1 conv2 fc1 fc2|        | 60000              |10000              |
+|fc1 fc2            | 138    | 57296              | 9836              | 786
+|fc1                | 128    | 55480              | 9725              | 892
+
+* TODO Build a network to classify the activation pattern
+
