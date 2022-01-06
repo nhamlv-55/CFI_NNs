@@ -134,7 +134,32 @@ def fgsm_attack(image, eps, data_grad):
     pertubed_image = torch.clamp(pertubed_image, 0, 1)
     return pertubed_image
 
-def gen_adv( model, device, test_loader, epsilon ):
+def sample_pair(data_loader)-> torch.Tensor, torch.Tensor, torch.Tensor:
+    """
+    Sample a random image from data_loader, then find the image closest to it in the same data_loader
+    """
+    inputs, labels = next(iter(data_loader))
+    sample = inputs[0]
+    label = labels[0]
+    print(data_loader.batch_size)
+    print(sample.shape)
+    sample_tiled = sample.unsqueeze(0).repeat(data_loader.batch_size, 1, 1, 1)
+    print(sample_tiled.shape)
+    
+    min_dist = 999999
+    closest_sample = None
+    for inputs, labels in data_loader:
+        dist = torch.norm(inputs - sample_tiled, dim=(2,3)).squeeze()
+        local_min_dist, idx = torch.min(dist, dim = 0)
+        
+        if local_min_dist < min_dist and local_min_dist > 0:
+            closest_sample = inputs[idx]
+            min_dist = local_min_dist    
+    return sample, closest_sample, min_dist
+
+
+
+def gen_adv( model, device, test_loader, epsilon ) -> float, float:
 
     # Accuracy counter
     correct = 0
