@@ -9,7 +9,7 @@ from sklearn.decomposition import PCA
 import torch
 from matplotlib import pyplot as plt
 import torch.nn.functional as F
-
+from typing import Tuple
 class PatternDataset(torch.utils.data.Dataset):
     def __init__(self, patterns, targets):
         self.patterns = patterns
@@ -43,6 +43,19 @@ def train(model, device, train_loader, optimizer, epoch):
         loss = F.nll_loss(output, target)
         loss.backward()
         optimizer.step()
+        
+
+def get_pattern(model, device, input)->dict:
+    """
+    Run one input through model and record activation pattern
+    """
+    model.eval()
+    model.register_log()
+    model(input.to(device))
+    tensor_log = copy.deepcopy(model.tensor_log)
+
+    return tensor_log
+    
 def test(model, device, test_loader, trace=False):
     model.eval()
     test_loss = 0
@@ -134,7 +147,7 @@ def fgsm_attack(image, eps, data_grad):
     pertubed_image = torch.clamp(pertubed_image, 0, 1)
     return pertubed_image
 
-def sample_pair(data_loader)-> torch.Tensor, torch.Tensor, torch.Tensor:
+def sample_pair(data_loader)-> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
     """
     Sample a random image from data_loader, then find the image closest to it in the same data_loader
     """
@@ -159,7 +172,7 @@ def sample_pair(data_loader)-> torch.Tensor, torch.Tensor, torch.Tensor:
 
 
 
-def gen_adv( model, device, test_loader, epsilon ) -> float, float:
+def gen_adv( model, device, test_loader, epsilon ) -> Tuple[float, float]:
 
     # Accuracy counter
     correct = 0
