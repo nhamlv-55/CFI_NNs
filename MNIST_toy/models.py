@@ -10,17 +10,32 @@ from datetime import datetime
 # to get activation
 ACTIVATION = None
 
-def get_activation(name, tensor_logger):
-    def hook(model, input, output):
-        raw = torch.sigmoid(torch.flatten(
-            output, start_dim=1, end_dim=-1)).cpu().detach().numpy()
-        raw = raw > 0.5 #need to convert here, because float takes a lot more memory
-        logging.debug("{}, {}".format(name,raw.shape))
-        tensor_logger[name] = np.concatenate((tensor_logger[name], raw), 
-                                            axis = 0) if name in tensor_logger else raw
-        logging.debug(tensor_logger[name].shape)
-        # ACTIVATION = np.concatenate((ACTIVATION, raw), axis=1)
-    return hook
+def get_activation(name, tensor_logger, detach):
+    if detach:
+        def hook(model, input, output):
+            raw = torch.sigmoid(torch.flatten(
+                output, start_dim=1, end_dim=-1)).cpu().detach().numpy()
+            raw = raw > 0.5 #need to convert here, because float takes a lot more memory
+            logging.debug("{}, {}".format(name,raw.shape))
+            tensor_logger[name] = np.concatenate((tensor_logger[name], raw), 
+                                                axis = 0) if name in tensor_logger else raw
+            logging.debug(tensor_logger[name].shape)
+            # ACTIVATION = np.concatenate((ACTIVATION, raw), axis=1)
+        return hook
+    else:
+        #keep the gradient, so cannot convert to bit here
+        def hook(model, input, output):
+            raw = torch.sigmoid(torch.flatten(
+                output, start_dim=1, end_dim=-1))
+            logging.debug("{}, {}".format(name,raw.shape))
+            tensor_logger[name] = torch.cat((tensor_logger[name], raw), 
+                                                axis = 0) if name in tensor_logger else raw
+            logging.debug(tensor_logger[name].shape)
+            # ACTIVATION = np.concatenate((ACTIVATION, raw), axis=1)
+        return hook
+
+
+
 
 class BaseNet(nn.Module):
     def __init__(self):
@@ -33,7 +48,7 @@ class BaseNet(nn.Module):
         for h in self.hooks:
             h.remove()
 
-    def register_log(self):
+    def register_log(self, detach):
         raise NotImplementedError
 
     def model_savename(self):
@@ -65,13 +80,13 @@ class TinyCNN(BaseNet):
         output = F.log_softmax(x, dim=1)
         return output
 
-    def register_log(self):
+    def register_log(self, detach=True):
         self.reset_hooks()
         # first layer should not make any difference?
-        self.hooks.append(self.conv1.register_forward_hook(get_activation('conv1', self.tensor_log)))
-        self.hooks.append(self.conv2.register_forward_hook(get_activation('conv2', self.tensor_log)))
-        self.hooks.append(self.fc1.register_forward_hook(get_activation('fc1', self.tensor_log)))
-        self.hooks.append(self.fc2.register_forward_hook(get_activation('fc2', self.tensor_log)))
+        self.hooks.append(self.conv1.register_forward_hook(get_activation('conv1', self.tensor_log, detach)))
+        self.hooks.append(self.conv2.register_forward_hook(get_activation('conv2', self.tensor_log, detach)))
+        self.hooks.append(self.fc1.register_forward_hook(get_activation('fc1', self.tensor_log, detach)))
+        self.hooks.append(self.fc2.register_forward_hook(get_activation('fc2', self.tensor_log, detach)))
 
     def model_savename(self):
         return "TinyCNN"+datetime.now().strftime("%H:%M:%S")
@@ -85,13 +100,13 @@ class FeedforwardNeuralNetModel(BaseNet):
         self.fc2 = nn.Linear(256, 128)
         self.fc3 = nn.Linear(128, 64)
         self.fc4 = nn.Linear(64, output_dim)
-    def register_log(self):
+    def register_log(self, detach=True):
         self.reset_hooks()    
         # first layer should not make any difference?
-        self.hooks.append(self.fc1.register_forward_hook(get_activation('fc1', self.tensor_log)))
-        self.hooks.append(self.fc2.register_forward_hook(get_activation('fc2', self.tensor_log)))
-        self.hooks.append(self.fc3.register_forward_hook(get_activation('fc3', self.tensor_log)))
-        self.hooks.append(self.fc4.register_forward_hook(get_activation('fc4', self.tensor_log)))
+        self.hooks.append(self.fc1.register_forward_hook(get_activation('fc1', self.tensor_log, detach)))
+        self.hooks.append(self.fc2.register_forward_hook(get_activation('fc2', self.tensor_log, detach)))
+        self.hooks.append(self.fc3.register_forward_hook(get_activation('fc3', self.tensor_log, detach)))
+        self.hooks.append(self.fc4.register_forward_hook(get_activation('fc4', self.tensor_log, detach)))
     def forward(self, x):
         out = F.relu(self.fc1(x.view(-1, 28*28)))
         out = F.relu(self.fc2(out))
