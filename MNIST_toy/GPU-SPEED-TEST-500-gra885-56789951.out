@@ -1,0 +1,179 @@
+cuda: True
+FeedforwardNeuralNetModel(
+  (fc1): Linear(in_features=784, out_features=256, bias=True)
+  (fc2): Linear(in_features=256, out_features=32, bias=True)
+  (relu): ReLU()
+  (fc3): Linear(in_features=32, out_features=10, bias=True)
+  (log_relu): ReLU()
+  (logger1): LoggerLayer(
+    (layer): ReLU()
+  )
+  (logger2): LoggerLayer(
+    (layer): ReLU()
+  )
+  (logger3): LoggerLayer(
+    (layer): Linear(in_features=32, out_features=10, bias=True)
+  )
+  (d1): Dropout(p=0.25, inplace=False)
+  (d2): Dropout(p=0.25, inplace=False)
+)
+torch.Size([256, 784])
+batch_size: 500, lr: 0.1, path lambda: 1.0, p: 2.0, l1: 0.0
+epochs are 1
+  0%|          | 0/1 [00:00<?, ?it/s]
+0it [00:00, ?it/s][A
+1it [00:16, 16.71s/it][A
+2it [00:32, 16.24s/it][A
+3it [00:48, 16.09s/it][A
+4it [01:04, 16.01s/it][A
+5it [01:20, 15.98s/it][A
+6it [01:36, 15.97s/it][A
+7it [01:52, 15.94s/it][A
+8it [02:08, 15.95s/it][A
+9it [02:24, 15.96s/it][A
+10it [02:40, 15.96s/it][A
+11it [02:56, 15.95s/it][A
+12it [03:11, 15.94s/it][A
+13it [03:27, 15.97s/it][A
+14it [03:44, 15.99s/it][A
+15it [03:59, 15.95s/it][A
+16it [04:15, 15.96s/it][A
+17it [04:31, 15.99s/it][A
+18it [04:48, 16.02s/it][A
+19it [05:03, 15.99s/it][A
+20it [05:19, 15.99s/it][A
+21it [05:35, 15.92s/it][A
+22it [05:51, 15.88s/it][A
+23it [06:07, 15.86s/it][A
+24it [06:23, 15.82s/it][A
+25it [06:38, 15.78s/it][A
+26it [06:54, 15.71s/it][A
+27it [07:09, 15.71s/it][A
+28it [07:25, 15.74s/it][A
+29it [07:41, 15.73s/it][A
+30it [07:57, 15.75s/it][A
+31it [08:13, 15.82s/it][A
+32it [08:29, 15.82s/it][A
+33it [08:44, 15.81s/it][A
+34it [09:00, 15.84s/it][A
+35it [09:16, 15.89s/it][A
+36it [09:32, 15.93s/it][A
+37it [09:48, 15.91s/it][A
+38it [10:04, 15.88s/it][A
+39it [10:20, 15.91s/it][A
+40it [10:36, 15.92s/it][A
+41it [10:52, 15.91s/it][A
+42it [11:08, 15.89s/it][A
+43it [11:23, 15.87s/it][A
+44it [11:39, 15.89s/it][A
+45it [11:55, 15.87s/it][A
+46it [12:11, 15.90s/it][A
+47it [12:27, 15.90s/it][A
+48it [12:43, 15.92s/it][A
+49it [12:59, 15.89s/it][A
+50it [13:15, 15.91s/it][A
+51it [13:31, 15.89s/it][A
+52it [13:47, 15.88s/it][A
+53it [14:02, 15.89s/it][A
+54it [14:18, 15.94s/it][A
+55it [14:34, 15.92s/it][A
+56it [14:50, 15.90s/it][A
+57it [15:06, 15.98s/it][A
+58it [15:22, 15.97s/it][A
+59it [15:38, 16.01s/it][A
+60it [15:54, 15.95s/it][A
+61it [16:10, 15.86s/it][A
+62it [16:26, 15.89s/it][A
+63it [16:41, 15.80s/it][A
+64it [16:57, 15.77s/it][A
+65it [17:13, 15.71s/it][A
+66it [17:28, 15.72s/it][A
+67it [17:44, 15.69s/it][A
+68it [18:00, 15.73s/it][A
+69it [18:16, 15.74s/it][A
+70it [18:31, 15.76s/it][A
+71it [18:47, 15.78s/it][A
+72it [19:03, 15.77s/it][A
+73it [19:19, 15.78s/it][A
+74it [19:35, 15.79s/it][A
+75it [19:50, 15.75s/it][A
+76it [20:06, 15.74s/it][A
+77it [20:22, 15.69s/it][A
+78it [20:37, 15.68s/it][A
+79it [20:53, 15.68s/it][A
+80it [21:09, 15.66s/it][A
+81it [21:24, 15.62s/it][A
+82it [21:40, 15.60s/it][A
+83it [21:55, 15.65s/it][A
+84it [22:11, 15.77s/it][A
+85it [22:27, 15.78s/it][A
+86it [22:43, 15.81s/it][A
+87it [22:59, 15.81s/it][A
+88it [23:15, 15.84s/it][A
+89it [23:31, 15.84s/it][A
+90it [23:46, 15.79s/it][A
+91it [24:02, 15.72s/it][A
+92it [24:18, 15.72s/it][A
+93it [24:34, 15.77s/it][A
+94it [24:49, 15.81s/it][A
+95it [25:05, 15.84s/it][A
+96it [25:21, 15.86s/it][A
+97it [25:37, 15.90s/it][A
+98it [25:53, 15.86s/it][A
+99it [26:09, 15.81s/it][A
+100it [26:25, 15.84s/it][A
+101it [26:41, 15.88s/it][A
+102it [26:57, 15.90s/it][A
+103it [27:13, 15.92s/it][A
+104it [27:28, 15.90s/it][A
+105it [27:44, 15.91s/it][A
+106it [28:00, 15.91s/it][A
+107it [28:16, 15.91s/it][A
+108it [28:32, 15.82s/it][A
+109it [28:47, 15.76s/it][A
+110it [29:03, 15.71s/it][A
+111it [29:19, 15.71s/it][A
+112it [29:34, 15.70s/it][A
+113it [29:50, 15.72s/it][A
+114it [30:06, 15.69s/it][A
+115it [30:21, 15.72s/it][A
+116it [30:37, 15.77s/it][A
+117it [30:53, 15.81s/it][A
+118it [31:09, 15.86s/it][A
+119it [31:25, 15.88s/it][A
+120it [31:41, 15.94s/it][A120it [31:41, 15.85s/it]
+Train Epoch: 1 [0/60000 (0%)]	Loss: 7318.926270
+Train Epoch: 1 [5000/60000 (8%)]	Loss: 11871.505859
+Train Epoch: 1 [10000/60000 (17%)]	Loss: 11544.040039
+Train Epoch: 1 [15000/60000 (25%)]	Loss: 10298.870117
+Train Epoch: 1 [20000/60000 (33%)]	Loss: 7104.142090
+Train Epoch: 1 [25000/60000 (42%)]	Loss: 3070.971436
+Train Epoch: 1 [30000/60000 (50%)]	Loss: 1810.897339
+Train Epoch: 1 [35000/60000 (58%)]	Loss: 11793.549805
+Train Epoch: 1 [40000/60000 (67%)]	Loss: 11793.646484
+Train Epoch: 1 [45000/60000 (75%)]	Loss: 11828.052734
+Train Epoch: 1 [50000/60000 (83%)]	Loss: 11884.192383
+Train Epoch: 1 [55000/60000 (92%)]	Loss: 11590.206055
+100%|██████████| 1/1 [31:44<00:00, 1904.40s/it]100%|██████████| 1/1 [31:44<00:00, 1904.40s/it]
+before test accuracy
+
+Test set: Average loss: 5.5664, Accuracy: 974/10000 (9.74%)
+
+before test accuracy
+
+Test set: Average loss: 5.5595, Accuracy: 5851/60000 (9.751666666666667%)
+
+before test accuracy
+
+Test set: Average loss: 5.5664, Accuracy: 974/10000 (9.74%)
+
+(False, True, False, False, True, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, True, True, False, False, False, False, False, False, True, False, False, False, False, False, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, True, False, False, False, False, False, False, True, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, True, False, False, False, True, True, False, True, False, True, False, False, False, False, False, False, False, False, False, True, False, True, False, False, False, False, True, False, True, False, False, False, False, False, False, False, False, True, False, True, False, False, False, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, True, False, False, False, False, False, True, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
+(False, True, False, False, True, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, True, False, False, False, False, False, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, True, False, False, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, True, False, True, False, True, False, True, False, False, False, False, False, False, False, False, False, False, False, True, True, False, False, False, True, False, True, False, False, False, False, False, False, False, False, True, False, True, False, False, False, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, True, False, False, False, False, False, False, False, False, True, False, False, False, False, True, True, False, False, False, False, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
+batch_size: 500, lr: 0.1, path lambda: 1.0, p: 2.0, l1: 0.0
+epochs are 1
+len train bitmap 60000
+n unique in train bitmap 53277
+len test bitmap 10000
+n unique in test bitmap 9612
+test bitmap is subset of train bitmap? False
+interesection size: 1251

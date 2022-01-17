@@ -9,7 +9,7 @@ from torch.optim.lr_scheduler import StepLR
 from tqdm import tqdm
 import copy
 import numpy as np
-from torchviz import make_dot
+
 
 
 from sklearn.decomposition import PCA
@@ -17,6 +17,7 @@ from sklearn.decomposition import PCA
 
 path_penalty = .01
 p = 2
+l1_lambda = 0
 
 class LoggerLayer(nn.Module):
     def __init__(self, other_layer: nn.Module, log: list):
@@ -121,6 +122,7 @@ def train(args, model, device, train_loader, optimizer, epoch):
     model.train()
     
     global path_penalty
+    #print("pp is:: {}".format(path_penalty))
     global p
 
     
@@ -138,11 +140,11 @@ def train(args, model, device, train_loader, optimizer, epoch):
         model.logger3.log = []
        
         output = model(data)
-        make_dot(output, params = dict(model.named_parameters())).render("torchviz", format="png")
+       
         #loss = F.nll_loss(output, target)
         #loss = custom_loss(output, target)
 
-        l1_lambda = 0.0005
+        global l1_lambda 
         l1_penalty = torch.sum(torch.abs(model.fc1.weight)) +  torch.sum(torch.abs(model.fc2.weight)) +torch.sum(torch.abs(model.fc3.weight))
 
         full_paths = []
@@ -182,7 +184,13 @@ def train(args, model, device, train_loader, optimizer, epoch):
         #print(path_loss)
         #print("\nold loss{}".format(loss))
         #loss += path_penalty * path_loss
-        loss = path_penalty * path_loss +  custom_loss(output, target)
+        #print("lpath is: {}".format(path_penalty))
+        loss = custom_loss(output, target) #
+        #print(loss)
+        loss+= path_penalty * path_loss 
+        #print(loss)
+        loss+=  l1_lambda * l1_penalty
+        #print(loss)
         #print("new loss{}".format(loss))
 
         loss.backward()
@@ -255,6 +263,7 @@ def binarize_trace(all_activations):
 
 
 def main():
+    global path_penalty
     # Training settings
     parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
     parser.add_argument('--batch-size', type=int, default=10000, metavar='N',
@@ -281,6 +290,8 @@ def main():
                         help='For Saving the current Model')
     parser.add_argument('--p', type=float,default=2,help='Value of p in p-norm for path based regularization, can be float')
     parser.add_argument('--lambda-pr', type=float, default = .01, help ='lambda for path based regularization')
+    parser.add_argument('--lambda-l1', type=float, default = 0.0, help='lambda for l1 regularization')
+    
 
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
@@ -294,7 +305,10 @@ def main():
     test_kwargs = {'batch_size': args.test_batch_size}
 
     path_penalty = args.lambda_pr
+    
+   
     p = args.p
+    l1_lambda = args.lambda_l1
 
     if use_cuda:
         cuda_kwargs = {'num_workers': 1,
@@ -318,15 +332,17 @@ def main():
     print(model)
     print(model.fc1.weight.size())
     
-    #optimizer = optim.Adadelta(model.parameters(), lr=args.lr)
-    optimizer = optim.SGD(model.parameters(), lr=args.lr)
+    optimizer = optim.Adadelta(model.parameters(), lr=args.lr)
+    #optimizer = optim.SGD(model.parameters(), lr=args.lr)
     scheduler = StepLR(optimizer, step_size=1, gamma=args.gamma)
-    print("batch_size: {}, lr: {}, path lambda: {}, p: {}".format(args.batch_size, args.lr,path_penalty,p))
+    print("batch_size: {}, lr: {}, path lambda: {}, p: {}, l1: {}, optimizer: {}".format(args.batch_size, args.lr,path_penalty,p, l1_lambda, optimizer))
     print("epochs are {}".format(args.epochs)) 
   
   
     for epoch in tqdm(range(1, args.epochs + 1)):
+        
         train(args, model, device, train_loader, optimizer, epoch)
+        
         test(model, device, test_loader)
         scheduler.step()
 
@@ -351,7 +367,7 @@ def main():
 
     # print(train_bitmap[:10])
     # print(test_bitmap[:10])\
-    print("batch_size: {}, lr: {}, path lambda: {}, p: {}".format(args.batch_size, args.lr,path_penalty,p))
+    print("batch_size: {}, lr: {}, path lambda: {}, p: {}, l1: {}".format(args.batch_size, args.lr,path_penalty,p, l1_lambda))
     print("epochs are {}".format(args.epochs)) 
 
     print("len train bitmap", len(train_bitmap))

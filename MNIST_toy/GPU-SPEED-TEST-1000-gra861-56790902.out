@@ -1,0 +1,761 @@
+cuda: True
+FeedforwardNeuralNetModel(
+  (fc1): Linear(in_features=784, out_features=256, bias=True)
+  (fc2): Linear(in_features=256, out_features=32, bias=True)
+  (relu): ReLU()
+  (fc3): Linear(in_features=32, out_features=10, bias=True)
+  (log_relu): ReLU()
+  (logger1): LoggerLayer(
+    (layer): ReLU()
+  )
+  (logger2): LoggerLayer(
+    (layer): ReLU()
+  )
+  (logger3): LoggerLayer(
+    (layer): Linear(in_features=32, out_features=10, bias=True)
+  )
+  (d1): Dropout(p=0.25, inplace=False)
+  (d2): Dropout(p=0.25, inplace=False)
+)
+torch.Size([256, 784])
+batch_size: 1000, lr: 0.1, path lambda: 1.0, p: 2.0, l1: 0.0
+epochs are 10
+  0%|          | 0/10 [00:00<?, ?it/s]
+0it [00:00, ?it/s][A
+1it [01:02, 62.19s/it][A
+2it [02:04, 62.08s/it][A
+3it [03:06, 62.26s/it][A
+4it [04:09, 62.44s/it][A
+5it [05:12, 62.60s/it][A
+6it [06:15, 62.67s/it][A
+7it [07:17, 62.70s/it][A
+8it [08:20, 62.71s/it][A
+9it [09:23, 62.74s/it][A
+10it [10:26, 62.91s/it][A
+11it [11:30, 63.09s/it][A
+12it [12:34, 63.36s/it][A
+13it [13:37, 63.34s/it][A
+14it [14:40, 63.33s/it][A
+15it [15:43, 63.27s/it][A
+16it [16:47, 63.31s/it][A
+17it [17:50, 63.31s/it][A
+18it [18:53, 63.30s/it][A
+19it [19:57, 63.36s/it][A
+20it [21:00, 63.35s/it][A
+21it [22:03, 63.29s/it][A
+22it [23:06, 63.22s/it][A
+23it [24:09, 63.17s/it][A
+24it [25:13, 63.19s/it][A
+25it [26:16, 63.30s/it][A
+26it [27:20, 63.32s/it][A
+27it [28:23, 63.38s/it][A
+28it [29:26, 63.33s/it][A
+29it [30:30, 63.33s/it][A
+30it [31:33, 63.31s/it][A
+31it [32:36, 63.34s/it][A
+32it [33:40, 63.41s/it][A
+33it [34:43, 63.45s/it][A
+34it [35:47, 63.42s/it][A
+35it [36:50, 63.28s/it][A
+36it [37:53, 63.18s/it][A
+37it [38:56, 63.21s/it][A
+38it [40:00, 63.45s/it][A
+39it [41:04, 63.48s/it][A
+40it [42:07, 63.43s/it][A
+41it [43:10, 63.33s/it][A
+42it [44:13, 63.35s/it][A
+43it [45:16, 63.27s/it][A
+44it [46:20, 63.28s/it][A
+45it [47:23, 63.33s/it][A
+46it [48:27, 63.34s/it][A
+47it [49:30, 63.48s/it][A
+48it [50:34, 63.38s/it][A
+49it [51:37, 63.39s/it][A
+50it [52:40, 63.32s/it][A
+51it [53:43, 63.31s/it][A
+52it [54:47, 63.40s/it][A
+53it [55:50, 63.38s/it][A
+54it [56:54, 63.33s/it][A
+55it [57:57, 63.27s/it][A
+56it [59:00, 63.25s/it][A
+57it [1:00:03, 63.27s/it][A
+58it [1:01:07, 63.35s/it][A
+59it [1:02:10, 63.39s/it][A
+60it [1:03:14, 63.51s/it][A60it [1:03:14, 63.24s/it]
+Train Epoch: 1 [0/60000 (0%)]	Loss: 29360.986328
+Train Epoch: 1 [10000/60000 (17%)]	Loss: 48096.558594
+Train Epoch: 1 [20000/60000 (33%)]	Loss: 47410.777344
+Train Epoch: 1 [30000/60000 (50%)]	Loss: 47312.500000
+Train Epoch: 1 [40000/60000 (67%)]	Loss: 46640.347656
+Train Epoch: 1 [50000/60000 (83%)]	Loss: 45900.308594
+ 10%|█         | 1/10 [1:03:17<9:29:38, 3797.61s/it]before test accuracy
+
+Test set: Average loss: 17.0750, Accuracy: 1032/10000 (10.32%)
+
+
+0it [00:00, ?it/s][A
+1it [01:01, 61.55s/it][A
+2it [02:05, 62.85s/it][A
+3it [03:07, 62.71s/it][A
+4it [04:10, 62.85s/it][A
+5it [05:14, 63.03s/it][A
+6it [06:17, 63.18s/it][A
+7it [07:21, 63.23s/it][A
+8it [08:24, 63.31s/it][A
+9it [09:27, 63.26s/it][A
+10it [10:30, 63.23s/it][A
+11it [11:34, 63.37s/it][A
+12it [12:37, 63.35s/it][A
+13it [13:41, 63.47s/it][A
+14it [14:45, 63.54s/it][A
+15it [15:48, 63.40s/it][A
+16it [16:51, 63.41s/it][A
+17it [17:55, 63.38s/it][A
+18it [18:58, 63.38s/it][A
+19it [20:02, 63.45s/it][A
+20it [21:05, 63.53s/it][A
+21it [22:09, 63.44s/it][A
+22it [23:12, 63.36s/it][A
+23it [24:15, 63.27s/it][A
+24it [25:18, 63.26s/it][A
+25it [26:22, 63.34s/it][A
+26it [27:25, 63.46s/it][A
+27it [28:29, 63.49s/it][A
+28it [29:32, 63.53s/it][A
+29it [30:36, 63.45s/it][A
+30it [31:39, 63.36s/it][A
+31it [32:43, 63.45s/it][A
+32it [33:46, 63.47s/it][A
+33it [34:50, 63.61s/it][A
+34it [35:53, 63.56s/it][A
+35it [36:57, 63.49s/it][A
+36it [38:00, 63.44s/it][A
+37it [39:03, 63.37s/it][A
+38it [40:07, 63.46s/it][A
+39it [41:10, 63.48s/it][A
+40it [42:14, 63.47s/it][A
+41it [43:17, 63.41s/it][A
+42it [44:20, 63.38s/it][A
+43it [45:24, 63.31s/it][A
+44it [46:27, 63.31s/it][A
+45it [47:30, 63.33s/it][A
+46it [48:34, 63.40s/it][A
+47it [49:37, 63.38s/it][A
+48it [50:41, 63.41s/it][A
+49it [51:44, 63.30s/it][A
+50it [52:47, 63.32s/it][A
+51it [53:51, 63.38s/it][A
+52it [54:54, 63.43s/it][A
+53it [55:58, 63.58s/it][A
+54it [57:02, 63.57s/it][A
+55it [58:05, 63.51s/it][A
+56it [59:08, 63.43s/it][A
+57it [1:00:11, 63.34s/it][A
+58it [1:01:15, 63.41s/it][A
+59it [1:02:18, 63.45s/it][A
+60it [1:03:22, 63.51s/it][A60it [1:03:22, 63.38s/it]
+Train Epoch: 2 [0/60000 (0%)]	Loss: 45562.441406
+Train Epoch: 2 [10000/60000 (17%)]	Loss: 45900.585938
+Train Epoch: 2 [20000/60000 (33%)]	Loss: 44106.105469
+Train Epoch: 2 [30000/60000 (50%)]	Loss: 44152.039062
+Train Epoch: 2 [40000/60000 (67%)]	Loss: 42516.105469
+Train Epoch: 2 [50000/60000 (83%)]	Loss: 41312.898438
+ 20%|██        | 2/10 [2:06:43<8:26:59, 3802.47s/it]before test accuracy
+
+Test set: Average loss: 15.3693, Accuracy: 1032/10000 (10.32%)
+
+
+0it [00:00, ?it/s][A
+1it [01:01, 61.79s/it][A
+2it [02:05, 62.76s/it][A
+3it [03:07, 62.69s/it][A
+4it [04:10, 62.80s/it][A
+5it [05:13, 62.93s/it][A
+6it [06:17, 63.09s/it][A
+7it [07:20, 63.26s/it][A
+8it [08:24, 63.33s/it][A
+9it [09:27, 63.32s/it][A
+10it [10:30, 63.27s/it][A
+11it [11:34, 63.33s/it][A
+12it [12:37, 63.33s/it][A
+13it [13:41, 63.39s/it][A
+14it [14:44, 63.38s/it][A
+15it [15:48, 63.43s/it][A
+16it [16:51, 63.45s/it][A
+17it [17:55, 63.47s/it][A
+18it [18:58, 63.37s/it][A
+19it [20:01, 63.35s/it][A
+20it [21:05, 63.39s/it][A
+21it [22:08, 63.39s/it][A
+22it [23:12, 63.46s/it][A
+23it [24:15, 63.44s/it][A
+24it [25:18, 63.32s/it][A
+25it [26:21, 63.31s/it][A
+26it [27:24, 63.25s/it][A
+27it [28:28, 63.33s/it][A
+28it [29:31, 63.36s/it][A
+29it [30:35, 63.51s/it][A
+30it [31:39, 63.46s/it][A
+31it [32:42, 63.36s/it][A
+32it [33:45, 63.28s/it][A
+33it [34:48, 63.16s/it][A
+34it [35:51, 63.10s/it][A
+35it [36:54, 63.12s/it][A
+36it [37:57, 63.11s/it][A
+37it [39:00, 63.10s/it][A
+38it [40:03, 63.05s/it][A
+39it [41:06, 63.00s/it][A
+40it [42:09, 62.97s/it][A
+41it [43:12, 62.97s/it][A
+42it [44:15, 63.03s/it][A
+43it [45:18, 63.06s/it][A
+44it [46:21, 63.10s/it][A
+45it [47:24, 63.08s/it][A
+46it [48:27, 63.02s/it][A
+47it [49:30, 63.01s/it][A
+48it [50:33, 63.05s/it][A
+49it [51:37, 63.13s/it][A
+50it [52:40, 63.23s/it][A
+51it [53:43, 63.23s/it][A
+52it [54:46, 63.24s/it][A
+53it [55:50, 63.30s/it][A
+54it [56:53, 63.36s/it][A
+55it [57:57, 63.38s/it][A
+56it [59:00, 63.42s/it][A
+57it [1:00:04, 63.42s/it][A
+58it [1:01:07, 63.37s/it][A
+59it [1:02:10, 63.31s/it][A
+60it [1:03:13, 63.28s/it][A60it [1:03:14, 63.23s/it]
+Train Epoch: 3 [0/60000 (0%)]	Loss: 39955.855469
+Train Epoch: 3 [10000/60000 (17%)]	Loss: 38936.828125
+Train Epoch: 3 [20000/60000 (33%)]	Loss: 36873.093750
+Train Epoch: 3 [30000/60000 (50%)]	Loss: 35014.210938
+Train Epoch: 3 [40000/60000 (67%)]	Loss: 32895.214844
+Train Epoch: 3 [50000/60000 (83%)]	Loss: 30369.730469
+ 30%|███       | 3/10 [3:10:00<7:23:20, 3800.02s/it]before test accuracy
+
+Test set: Average loss: 14.2791, Accuracy: 974/10000 (9.74%)
+
+
+0it [00:00, ?it/s][A
+1it [01:01, 61.57s/it][A
+2it [02:05, 62.70s/it][A
+3it [03:07, 62.61s/it][A
+4it [04:10, 62.64s/it][A
+5it [05:12, 62.62s/it][A
+6it [06:15, 62.67s/it][A
+7it [07:18, 62.88s/it][A
+8it [08:22, 63.01s/it][A
+9it [09:25, 63.02s/it][A
+10it [10:28, 63.03s/it][A
+11it [11:31, 62.96s/it][A
+12it [12:33, 62.91s/it][A
+13it [13:36, 62.89s/it][A
+14it [14:39, 62.97s/it][A
+15it [15:43, 63.02s/it][A
+16it [16:46, 63.04s/it][A
+17it [17:49, 63.03s/it][A
+18it [18:52, 63.04s/it][A
+19it [19:54, 62.95s/it][A
+20it [20:57, 62.92s/it][A
+21it [22:00, 62.98s/it][A
+22it [23:04, 63.02s/it][A
+23it [24:07, 63.12s/it][A
+24it [25:10, 63.13s/it][A
+25it [26:13, 63.10s/it][A
+26it [27:16, 63.01s/it][A
+27it [28:19, 63.02s/it][A
+28it [29:22, 62.96s/it][A
+29it [30:25, 63.11s/it][A
+30it [31:29, 63.20s/it][A
+31it [32:32, 63.17s/it][A
+32it [33:35, 63.15s/it][A
+33it [34:38, 63.10s/it][A
+34it [35:41, 63.05s/it][A
+35it [36:43, 62.96s/it][A
+36it [37:46, 62.86s/it][A
+37it [38:49, 62.86s/it][A
+38it [39:52, 62.88s/it][A
+39it [40:54, 62.77s/it][A
+40it [41:57, 62.70s/it][A
+41it [42:59, 62.66s/it][A
+42it [44:02, 62.72s/it][A
+43it [45:05, 62.72s/it][A
+44it [46:08, 62.68s/it][A
+45it [47:10, 62.58s/it][A
+46it [48:12, 62.50s/it][A
+47it [49:14, 62.36s/it][A
+48it [50:16, 62.15s/it][A
+49it [51:18, 62.01s/it][A
+50it [52:19, 61.89s/it][A
+51it [53:21, 61.78s/it][A
+52it [54:23, 61.81s/it][A
+53it [55:24, 61.66s/it][A
+54it [56:25, 61.60s/it][A
+55it [57:26, 61.43s/it][A
+56it [58:27, 61.23s/it][A
+57it [59:28, 61.10s/it][A
+58it [1:00:29, 61.04s/it][A
+59it [1:01:30, 61.06s/it][A
+60it [1:02:31, 61.02s/it][A60it [1:02:31, 62.53s/it]
+Train Epoch: 4 [0/60000 (0%)]	Loss: 23349.857422
+Train Epoch: 4 [10000/60000 (17%)]	Loss: 20973.675781
+Train Epoch: 4 [20000/60000 (33%)]	Loss: 18964.306641
+Train Epoch: 4 [30000/60000 (50%)]	Loss: 16061.997070
+Train Epoch: 4 [40000/60000 (67%)]	Loss: 13986.888672
+Train Epoch: 4 [50000/60000 (83%)]	Loss: 12109.064453
+ 40%|████      | 4/10 [4:12:35<6:18:12, 3782.09s/it]before test accuracy
+
+Test set: Average loss: 151.7264, Accuracy: 1005/10000 (10.05%)
+
+
+0it [00:00, ?it/s][A
+1it [01:00, 60.43s/it][A
+2it [02:02, 61.42s/it][A
+3it [03:04, 61.62s/it][A
+4it [04:06, 61.94s/it][A
+5it [05:09, 62.07s/it][A
+6it [06:11, 62.20s/it][A
+7it [07:13, 62.26s/it][A
+8it [08:16, 62.30s/it][A
+9it [09:18, 62.41s/it][A
+10it [10:21, 62.31s/it][A
+11it [11:23, 62.42s/it][A
+12it [12:26, 62.43s/it][A
+13it [13:28, 62.43s/it][A
+14it [14:31, 62.51s/it][A
+15it [15:34, 62.61s/it][A
+16it [16:36, 62.59s/it][A
+17it [17:39, 62.58s/it][A
+18it [18:41, 62.62s/it][A
+19it [19:44, 62.61s/it][A
+20it [20:46, 62.54s/it][A
+21it [21:49, 62.52s/it][A
+22it [22:52, 62.55s/it][A
+23it [23:54, 62.55s/it][A
+24it [24:57, 62.57s/it][A
+25it [25:59, 62.51s/it][A
+26it [27:01, 62.45s/it][A
+27it [28:04, 62.48s/it][A
+28it [29:06, 62.50s/it][A
+29it [30:09, 62.61s/it][A
+30it [31:12, 62.58s/it][A
+31it [32:14, 62.58s/it][A
+32it [33:17, 62.48s/it][A
+33it [34:19, 62.51s/it][A
+34it [35:22, 62.46s/it][A
+35it [36:24, 62.42s/it][A
+36it [37:26, 62.42s/it][A
+37it [38:29, 62.51s/it][A
+38it [39:32, 62.56s/it][A
+39it [40:34, 62.49s/it][A
+40it [41:36, 62.41s/it][A
+41it [42:39, 62.40s/it][A
+42it [43:41, 62.38s/it][A
+43it [44:44, 62.41s/it][A
+44it [45:46, 62.48s/it][A
+45it [46:49, 62.51s/it][A
+46it [47:51, 62.50s/it][A
+47it [48:54, 62.46s/it][A
+48it [49:56, 62.47s/it][A
+49it [50:58, 62.38s/it][A
+50it [52:01, 62.45s/it][A
+51it [53:03, 62.48s/it][A
+52it [54:06, 62.55s/it][A
+53it [55:09, 62.52s/it][A
+54it [56:11, 62.47s/it][A
+55it [57:13, 62.43s/it][A
+56it [58:15, 62.35s/it][A
+57it [59:18, 62.33s/it][A
+58it [1:00:20, 62.38s/it][A
+59it [1:01:23, 62.39s/it][A
+60it [1:02:25, 62.44s/it][A60it [1:02:25, 62.43s/it]
+Train Epoch: 5 [0/60000 (0%)]	Loss: 11240.416016
+Train Epoch: 5 [10000/60000 (17%)]	Loss: 12965.102539
+Train Epoch: 5 [20000/60000 (33%)]	Loss: 9066.136719
+Train Epoch: 5 [30000/60000 (50%)]	Loss: 8597.849609
+Train Epoch: 5 [40000/60000 (67%)]	Loss: 8139.039551
+Train Epoch: 5 [50000/60000 (83%)]	Loss: 7448.788086
+ 50%|█████     | 5/10 [5:15:03<5:14:10, 3770.07s/it]before test accuracy
+
+Test set: Average loss: 523.4525, Accuracy: 932/10000 (9.32%)
+
+
+0it [00:00, ?it/s][A
+1it [00:59, 59.49s/it][A
+2it [02:00, 60.46s/it][A
+3it [03:01, 60.62s/it][A
+4it [04:02, 60.78s/it][A
+5it [05:03, 60.96s/it][A
+6it [06:05, 61.07s/it][A
+7it [07:06, 61.19s/it][A
+8it [08:08, 61.32s/it][A
+9it [09:09, 61.35s/it][A
+10it [10:10, 61.37s/it][A
+11it [11:12, 61.37s/it][A
+12it [12:13, 61.28s/it][A
+13it [13:14, 61.24s/it][A
+14it [14:15, 61.22s/it][A
+15it [15:17, 61.26s/it][A
+16it [16:18, 61.33s/it][A
+17it [17:19, 61.37s/it][A
+18it [18:21, 61.44s/it][A
+19it [19:22, 61.41s/it][A
+20it [20:24, 61.38s/it][A
+21it [21:25, 61.32s/it][A
+22it [22:26, 61.29s/it][A
+23it [23:27, 61.31s/it][A
+24it [24:29, 61.30s/it][A
+25it [25:30, 61.34s/it][A
+26it [26:32, 61.43s/it][A
+27it [27:33, 61.44s/it][A
+28it [28:35, 61.47s/it][A
+29it [29:36, 61.44s/it][A
+30it [30:38, 61.45s/it][A
+31it [31:39, 61.45s/it][A
+32it [32:40, 61.40s/it][A
+33it [33:42, 61.39s/it][A
+34it [34:43, 61.39s/it][A
+35it [35:45, 61.41s/it][A
+36it [36:46, 61.45s/it][A
+37it [37:48, 61.49s/it][A
+38it [38:49, 61.41s/it][A
+39it [39:50, 61.30s/it][A
+40it [40:51, 61.27s/it][A
+41it [41:53, 61.34s/it][A
+42it [42:54, 61.43s/it][A
+43it [43:56, 61.41s/it][A
+44it [44:57, 61.43s/it][A
+45it [45:59, 61.46s/it][A
+46it [47:00, 61.44s/it][A
+47it [48:02, 61.43s/it][A
+48it [49:03, 61.34s/it][A
+49it [50:04, 61.27s/it][A
+50it [51:05, 61.30s/it][A
+51it [52:06, 61.27s/it][A
+52it [53:08, 61.32s/it][A
+53it [54:09, 61.32s/it][A
+54it [55:11, 61.40s/it][A
+55it [56:12, 61.39s/it][A
+56it [57:13, 61.39s/it][A
+57it [58:15, 61.38s/it][A
+58it [59:16, 61.42s/it][A
+59it [1:00:18, 61.50s/it][A
+60it [1:01:19, 61.49s/it][A60it [1:01:20, 61.33s/it]
+Train Epoch: 6 [0/60000 (0%)]	Loss: 6464.705566
+Train Epoch: 6 [10000/60000 (17%)]	Loss: 9242.279297
+Train Epoch: 6 [20000/60000 (33%)]	Loss: 5661.258301
+Train Epoch: 6 [30000/60000 (50%)]	Loss: 5147.281250
+Train Epoch: 6 [40000/60000 (67%)]	Loss: 10368.271484
+Train Epoch: 6 [50000/60000 (83%)]	Loss: 9357.267578
+ 60%|██████    | 6/10 [6:16:27<4:09:22, 3740.51s/it]before test accuracy
+
+Test set: Average loss: 3450.8680, Accuracy: 876/10000 (8.76%)
+
+
+0it [00:00, ?it/s][A
+1it [01:01, 61.15s/it][A
+2it [02:03, 62.01s/it][A
+3it [03:04, 61.61s/it][A
+4it [04:06, 61.48s/it][A
+5it [05:07, 61.49s/it][A
+6it [06:08, 61.41s/it][A
+7it [07:10, 61.47s/it][A
+8it [08:11, 61.44s/it][A
+9it [09:13, 61.40s/it][A
+10it [10:15, 61.53s/it][A
+11it [11:16, 61.53s/it][A
+12it [12:17, 61.47s/it][A
+13it [13:19, 61.49s/it][A
+14it [14:20, 61.47s/it][A
+15it [15:22, 61.44s/it][A
+16it [16:23, 61.39s/it][A
+17it [17:24, 61.35s/it][A
+18it [18:25, 61.27s/it][A
+19it [19:26, 61.18s/it][A
+20it [20:27, 61.13s/it][A
+21it [21:28, 60.98s/it][A
+22it [22:29, 60.88s/it][A
+23it [23:29, 60.83s/it][A
+24it [24:30, 60.71s/it][A
+25it [25:30, 60.60s/it][A
+26it [26:31, 60.59s/it][A
+27it [27:31, 60.56s/it][A
+28it [28:32, 60.62s/it][A
+29it [29:33, 60.62s/it][A
+30it [30:33, 60.60s/it][A
+31it [31:34, 60.61s/it][A
+32it [32:34, 60.53s/it][A
+33it [33:35, 60.52s/it][A
+34it [34:35, 60.52s/it][A
+35it [35:36, 60.52s/it][A
+36it [36:36, 60.51s/it][A
+37it [37:37, 60.56s/it][A
+38it [38:37, 60.58s/it][A
+39it [39:38, 60.52s/it][A
+40it [40:38, 60.50s/it][A
+41it [41:39, 60.49s/it][A
+42it [42:39, 60.53s/it][A
+43it [43:40, 60.48s/it][A
+44it [44:40, 60.47s/it][A
+45it [45:41, 60.60s/it][A
+46it [46:42, 60.63s/it][A
+47it [47:42, 60.57s/it][A
+48it [48:43, 60.58s/it][A
+49it [49:43, 60.49s/it][A
+50it [50:44, 60.61s/it][A
+51it [51:45, 60.64s/it][A
+52it [52:45, 60.65s/it][A
+53it [53:46, 60.59s/it][A
+54it [54:47, 60.64s/it][A
+55it [55:47, 60.65s/it][A
+56it [56:48, 60.61s/it][A
+57it [57:48, 60.65s/it][A
+58it [58:49, 60.56s/it][A
+59it [59:49, 60.55s/it][A
+60it [1:00:50, 60.52s/it][A60it [1:00:50, 60.84s/it]
+Train Epoch: 7 [0/60000 (0%)]	Loss: 12771.731445
+Train Epoch: 7 [10000/60000 (17%)]	Loss: 6075.878906
+Train Epoch: 7 [20000/60000 (33%)]	Loss: 8470.184570
+Train Epoch: 7 [30000/60000 (50%)]	Loss: 8648.757812
+Train Epoch: 7 [40000/60000 (67%)]	Loss: 8897.849609
+Train Epoch: 7 [50000/60000 (83%)]	Loss: 8598.470703
+ 70%|███████   | 7/10 [7:17:20<3:05:36, 3712.04s/it]before test accuracy
+
+Test set: Average loss: 2317.3854, Accuracy: 1072/10000 (10.72%)
+
+
+0it [00:00, ?it/s][A
+1it [01:00, 60.16s/it][A
+2it [02:02, 61.43s/it][A
+3it [03:04, 61.61s/it][A
+4it [04:06, 61.87s/it][A
+5it [05:08, 62.03s/it][A
+6it [06:11, 62.10s/it][A
+7it [07:13, 62.18s/it][A
+8it [08:15, 62.22s/it][A
+9it [09:18, 62.29s/it][A
+10it [10:20, 62.36s/it][A
+11it [11:23, 62.35s/it][A
+12it [12:25, 62.40s/it][A
+13it [13:27, 62.36s/it][A
+14it [14:30, 62.32s/it][A
+15it [15:32, 62.36s/it][A
+16it [16:35, 62.40s/it][A
+17it [17:37, 62.45s/it][A
+18it [18:40, 62.46s/it][A
+19it [19:42, 62.31s/it][A
+20it [20:44, 62.24s/it][A
+21it [21:46, 62.14s/it][A
+22it [22:47, 62.08s/it][A
+23it [23:49, 62.04s/it][A
+24it [24:51, 62.06s/it][A
+25it [25:54, 62.11s/it][A
+26it [26:56, 62.12s/it][A
+27it [27:58, 62.10s/it][A
+28it [29:00, 62.07s/it][A
+29it [30:02, 62.03s/it][A
+30it [31:04, 61.96s/it][A
+31it [32:06, 61.96s/it][A
+32it [33:08, 61.96s/it][A
+33it [34:10, 62.04s/it][A
+34it [35:12, 62.12s/it][A
+35it [36:14, 62.09s/it][A
+36it [37:16, 62.09s/it][A
+37it [38:18, 62.12s/it][A
+38it [39:20, 62.05s/it][A
+39it [40:22, 62.08s/it][A
+40it [41:24, 62.06s/it][A
+41it [42:27, 62.06s/it][A
+42it [43:29, 62.10s/it][A
+43it [44:31, 62.10s/it][A
+44it [45:33, 62.16s/it][A
+45it [46:35, 62.09s/it][A
+46it [47:37, 62.08s/it][A
+47it [48:39, 62.02s/it][A
+48it [49:41, 62.04s/it][A
+49it [50:43, 62.10s/it][A
+50it [51:46, 62.14s/it][A
+51it [52:48, 62.13s/it][A
+52it [53:50, 62.10s/it][A
+53it [54:52, 62.15s/it][A
+54it [55:54, 62.08s/it][A
+55it [56:56, 62.03s/it][A
+56it [57:58, 62.02s/it][A
+57it [59:00, 62.00s/it][A
+58it [1:00:02, 62.01s/it][A
+59it [1:01:04, 62.09s/it][A
+60it [1:02:06, 62.04s/it][A60it [1:02:06, 62.11s/it]
+Train Epoch: 8 [0/60000 (0%)]	Loss: 8459.097656
+Train Epoch: 8 [10000/60000 (17%)]	Loss: 7536.787598
+Train Epoch: 8 [20000/60000 (33%)]	Loss: 5582.319336
+Train Epoch: 8 [30000/60000 (50%)]	Loss: 5451.157227
+Train Epoch: 8 [40000/60000 (67%)]	Loss: 6894.433105
+Train Epoch: 8 [50000/60000 (83%)]	Loss: 8712.318359
+ 80%|████████  | 8/10 [8:19:30<2:03:55, 3717.62s/it]before test accuracy
+
+Test set: Average loss: 1059.5457, Accuracy: 1100/10000 (11.0%)
+
+
+0it [00:00, ?it/s][A
+1it [00:59, 59.18s/it][A
+2it [02:00, 60.15s/it][A
+3it [03:00, 60.18s/it][A
+4it [04:00, 60.38s/it][A
+5it [05:01, 60.55s/it][A
+6it [06:02, 60.69s/it][A
+7it [07:03, 60.82s/it][A
+8it [08:04, 60.87s/it][A
+9it [09:06, 60.99s/it][A
+10it [10:06, 60.93s/it][A
+11it [11:07, 60.87s/it][A
+12it [12:08, 60.93s/it][A
+13it [13:09, 60.92s/it][A
+14it [14:10, 60.98s/it][A
+15it [15:11, 61.06s/it][A
+16it [16:12, 61.05s/it][A
+17it [17:14, 61.06s/it][A
+18it [18:15, 61.04s/it][A
+19it [19:15, 60.99s/it][A
+20it [20:16, 60.93s/it][A
+21it [21:17, 60.87s/it][A
+22it [22:18, 60.89s/it][A
+23it [23:19, 60.90s/it][A
+24it [24:20, 60.90s/it][A
+25it [25:21, 60.88s/it][A
+26it [26:21, 60.88s/it][A
+27it [27:22, 60.92s/it][A
+28it [28:23, 60.95s/it][A
+29it [29:24, 60.87s/it][A
+30it [30:25, 61.02s/it][A
+31it [31:26, 60.99s/it][A
+32it [32:28, 61.03s/it][A
+33it [33:29, 61.02s/it][A
+34it [34:29, 60.99s/it][A
+35it [35:31, 61.09s/it][A
+36it [36:32, 61.06s/it][A
+37it [37:33, 61.00s/it][A
+38it [38:34, 61.03s/it][A
+39it [39:35, 61.02s/it][A
+40it [40:36, 60.98s/it][A
+41it [41:37, 60.97s/it][A
+42it [42:38, 60.98s/it][A
+43it [43:38, 60.93s/it][A
+44it [44:39, 60.90s/it][A
+45it [45:40, 60.88s/it][A
+46it [46:41, 60.91s/it][A
+47it [47:42, 60.96s/it][A
+48it [48:43, 60.94s/it][A
+49it [49:44, 60.92s/it][A
+50it [50:44, 60.83s/it][A
+51it [51:45, 60.78s/it][A
+52it [52:46, 60.81s/it][A
+53it [53:47, 60.89s/it][A
+54it [54:48, 60.89s/it][A
+55it [55:49, 60.87s/it][A
+56it [56:50, 60.88s/it][A
+57it [57:51, 60.89s/it][A
+58it [58:51, 60.86s/it][A
+59it [59:52, 60.87s/it][A
+60it [1:00:53, 60.90s/it][A60it [1:00:53, 60.90s/it]
+Train Epoch: 9 [0/60000 (0%)]	Loss: 5366.759766
+Train Epoch: 9 [10000/60000 (17%)]	Loss: 4288.970703
+Train Epoch: 9 [20000/60000 (33%)]	Loss: 3767.177734
+Train Epoch: 9 [30000/60000 (50%)]	Loss: 4144.143555
+Train Epoch: 9 [40000/60000 (67%)]	Loss: 4521.673828
+Train Epoch: 9 [50000/60000 (83%)]	Loss: 4158.822266
+ 90%|█████████ | 9/10 [9:20:26<1:01:38, 3698.65s/it]before test accuracy
+
+Test set: Average loss: 1148.7680, Accuracy: 1006/10000 (10.06%)
+
+
+0it [00:00, ?it/s][A
+1it [00:59, 59.24s/it][A
+2it [02:00, 60.39s/it][A
+3it [03:00, 60.41s/it][A
+4it [04:01, 60.55s/it][A
+5it [05:02, 60.62s/it][A
+6it [06:03, 60.66s/it][A
+7it [07:04, 60.76s/it][A
+8it [08:04, 60.78s/it][A
+9it [09:05, 60.78s/it][A
+10it [10:06, 60.83s/it][A
+11it [11:07, 60.86s/it][A
+12it [12:08, 60.94s/it][A
+13it [13:09, 60.94s/it][A
+14it [14:10, 60.97s/it][A
+15it [15:11, 60.97s/it][A
+16it [16:12, 61.00s/it][A
+17it [17:13, 60.99s/it][A
+18it [18:14, 60.95s/it][A
+19it [19:15, 60.92s/it][A
+20it [20:16, 60.91s/it][A
+21it [21:17, 60.90s/it][A
+22it [22:18, 60.92s/it][A
+23it [23:19, 60.98s/it][A
+24it [24:20, 60.97s/it][A
+25it [25:21, 60.97s/it][A
+26it [26:22, 60.97s/it][A
+27it [27:23, 60.98s/it][A
+28it [28:24, 60.97s/it][A
+29it [29:24, 60.92s/it][A
+30it [30:25, 60.92s/it][A
+31it [31:26, 60.92s/it][A
+32it [32:27, 60.88s/it][A
+33it [33:28, 60.90s/it][A
+34it [34:29, 60.92s/it][A
+35it [35:30, 60.90s/it][A
+36it [36:31, 60.91s/it][A
+37it [37:32, 60.96s/it][A
+38it [38:33, 60.97s/it][A
+39it [39:33, 60.88s/it][A
+40it [40:34, 60.89s/it][A
+41it [41:35, 60.90s/it][A
+42it [42:36, 60.97s/it][A
+43it [43:37, 60.98s/it][A
+44it [44:38, 60.93s/it][A
+45it [45:39, 60.98s/it][A
+46it [46:40, 61.00s/it][A
+47it [47:41, 60.91s/it][A
+48it [48:42, 60.85s/it][A
+49it [49:43, 60.87s/it][A
+50it [50:44, 60.92s/it][A
+51it [51:45, 60.96s/it][A
+52it [52:46, 61.02s/it][A
+53it [53:47, 61.02s/it][A
+54it [54:48, 61.04s/it][A
+55it [55:49, 61.02s/it][A
+56it [56:50, 60.99s/it][A
+57it [57:51, 60.96s/it][A
+58it [58:52, 60.93s/it][A
+59it [59:52, 60.89s/it][A
+60it [1:00:53, 60.88s/it][A60it [1:00:53, 60.90s/it]
+Train Epoch: 10 [0/60000 (0%)]	Loss: 4146.441895
+Train Epoch: 10 [10000/60000 (17%)]	Loss: 3604.828369
+Train Epoch: 10 [20000/60000 (33%)]	Loss: 2567.798828
+Train Epoch: 10 [30000/60000 (50%)]	Loss: 2499.485840
+Train Epoch: 10 [40000/60000 (67%)]	Loss: 1916.396484
+Train Epoch: 10 [50000/60000 (83%)]	Loss: 2377.894531
+100%|██████████| 10/10 [10:21:23<00:00, 3685.79s/it]100%|██████████| 10/10 [10:21:23<00:00, 3728.40s/it]
+before test accuracy
+
+Test set: Average loss: 1029.7996, Accuracy: 1254/10000 (12.54%)
+
+before test accuracy
+
+Test set: Average loss: 898.1609, Accuracy: 7766/60000 (12.943333333333333%)
+
+before test accuracy
+
+Test set: Average loss: 1029.7997, Accuracy: 1254/10000 (12.54%)
+
+(False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
+(False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
+batch_size: 1000, lr: 0.1, path lambda: 1.0, p: 2.0, l1: 0.0
+epochs are 10
+len train bitmap 60000
+n unique in train bitmap 49495
+len test bitmap 10000
+n unique in test bitmap 8893
+test bitmap is subset of train bitmap? False
+interesection size: 1387

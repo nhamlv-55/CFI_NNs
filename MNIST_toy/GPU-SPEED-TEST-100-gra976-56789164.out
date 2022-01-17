@@ -1,0 +1,707 @@
+cuda: True
+FeedforwardNeuralNetModel(
+  (fc1): Linear(in_features=784, out_features=256, bias=True)
+  (fc2): Linear(in_features=256, out_features=32, bias=True)
+  (relu): ReLU()
+  (fc3): Linear(in_features=32, out_features=10, bias=True)
+  (log_relu): ReLU()
+  (logger1): LoggerLayer(
+    (layer): ReLU()
+  )
+  (logger2): LoggerLayer(
+    (layer): ReLU()
+  )
+  (logger3): LoggerLayer(
+    (layer): Linear(in_features=32, out_features=10, bias=True)
+  )
+  (d1): Dropout(p=0.25, inplace=False)
+  (d2): Dropout(p=0.25, inplace=False)
+)
+torch.Size([256, 784])
+batch_size: 100, lr: 0.1, path lambda: 1.0, p: 2.0, l1: 0.0
+epochs are 1
+  0%|          | 0/1 [00:00<?, ?it/s]
+0it [00:00, ?it/s][A
+1it [00:01,  1.83s/it][A
+2it [00:02,  1.32s/it][A
+3it [00:03,  1.14s/it][A
+4it [00:04,  1.05s/it][A
+5it [00:05,  1.01s/it][A
+6it [00:06,  1.06it/s][A
+7it [00:07,  1.05it/s][A
+8it [00:08,  1.06it/s][A
+9it [00:09,  1.05it/s][A
+10it [00:10,  1.05it/s][A
+11it [00:11,  1.06it/s][A
+12it [00:12,  1.06it/s][A
+13it [00:13,  1.05it/s][A
+14it [00:13,  1.06it/s][A
+15it [00:14,  1.06it/s][A
+16it [00:15,  1.06it/s][A
+17it [00:16,  1.07it/s][A
+18it [00:17,  1.07it/s][A
+19it [00:18,  1.07it/s][A
+20it [00:19,  1.06it/s][A
+21it [00:20,  1.06it/s][A
+22it [00:21,  1.05it/s][A
+23it [00:22,  1.06it/s][A
+24it [00:23,  1.05it/s][A
+25it [00:24,  1.06it/s][A
+26it [00:25,  1.05it/s][A
+27it [00:26,  1.05it/s][A
+28it [00:27,  1.05it/s][A
+29it [00:28,  1.05it/s][A
+30it [00:29,  1.05it/s][A
+31it [00:30,  1.05it/s][A
+32it [00:31,  1.05it/s][A
+33it [00:31,  1.05it/s][A
+34it [00:32,  1.05it/s][A
+35it [00:33,  1.05it/s][A
+36it [00:34,  1.09it/s][A
+37it [00:35,  1.08it/s][A
+38it [00:36,  1.07it/s][A
+39it [00:37,  1.07it/s][A
+40it [00:38,  1.06it/s][A
+41it [00:39,  1.05it/s][A
+42it [00:40,  1.09it/s][A
+43it [00:41,  1.08it/s][A
+44it [00:42,  1.08it/s][A
+45it [00:43,  1.07it/s][A
+46it [00:44,  1.06it/s][A
+47it [00:45,  1.06it/s][A
+48it [00:46,  1.06it/s][A
+49it [00:46,  1.07it/s][A
+50it [00:47,  1.07it/s][A
+51it [00:48,  1.06it/s][A
+52it [00:49,  1.06it/s][A
+53it [00:50,  1.06it/s][A
+54it [00:51,  1.06it/s][A
+55it [00:52,  1.10it/s][A
+56it [00:53,  1.09it/s][A
+57it [00:54,  1.08it/s][A
+58it [00:55,  1.07it/s][A
+59it [00:56,  1.07it/s][A
+60it [00:57,  1.07it/s][A
+61it [00:58,  1.07it/s][A
+62it [00:59,  1.07it/s][A
+63it [01:00,  1.06it/s][A
+64it [01:00,  1.06it/s][A
+65it [01:01,  1.07it/s][A
+66it [01:02,  1.06it/s][A
+67it [01:03,  1.05it/s][A
+68it [01:04,  1.05it/s][A
+69it [01:05,  1.04it/s][A
+70it [01:06,  1.04it/s][A
+71it [01:07,  1.05it/s][A
+72it [01:08,  1.05it/s][A
+73it [01:09,  1.04it/s][A
+74it [01:10,  1.05it/s][A
+75it [01:11,  1.05it/s][A
+76it [01:12,  1.05it/s][A
+77it [01:13,  1.05it/s][A
+78it [01:14,  1.05it/s][A
+79it [01:15,  1.05it/s][A
+80it [01:16,  1.05it/s][A
+81it [01:17,  1.05it/s][A
+82it [01:18,  1.05it/s][A
+83it [01:19,  1.05it/s][A
+84it [01:20,  1.05it/s][A
+85it [01:20,  1.05it/s][A
+86it [01:21,  1.06it/s][A
+87it [01:22,  1.09it/s][A
+88it [01:23,  1.08it/s][A
+89it [01:24,  1.07it/s][A
+90it [01:25,  1.07it/s][A
+91it [01:26,  1.07it/s][A
+92it [01:27,  1.05it/s][A
+93it [01:28,  1.06it/s][A
+94it [01:29,  1.02s/it][A
+95it [01:30,  1.01s/it][A
+96it [01:31,  1.02it/s][A
+97it [01:32,  1.02it/s][A
+98it [01:33,  1.03it/s][A
+99it [01:34,  1.04it/s][A
+100it [01:35,  1.04it/s][A
+101it [01:36,  1.05it/s][A
+102it [01:37,  1.06it/s][A
+103it [01:38,  1.06it/s][A
+104it [01:39,  1.05it/s][A
+105it [01:40,  1.05it/s][A
+106it [01:41,  1.04it/s][A
+107it [01:42,  1.05it/s][A
+108it [01:42,  1.05it/s][A
+109it [01:43,  1.05it/s][A
+110it [01:44,  1.05it/s][A
+111it [01:45,  1.05it/s][A
+112it [01:46,  1.05it/s][A
+113it [01:47,  1.04it/s][A
+114it [01:48,  1.05it/s][A
+115it [01:49,  1.04it/s][A
+116it [01:50,  1.04it/s][A
+117it [01:51,  1.04it/s][A
+118it [01:52,  1.04it/s][A
+119it [01:53,  1.04it/s][A
+120it [01:54,  1.04it/s][A
+121it [01:55,  1.04it/s][A
+122it [01:56,  1.05it/s][A
+123it [01:57,  1.05it/s][A
+124it [01:58,  1.05it/s][A
+125it [01:59,  1.06it/s][A
+126it [02:00,  1.05it/s][A
+127it [02:01,  1.06it/s][A
+128it [02:02,  1.05it/s][A
+129it [02:03,  1.05it/s][A
+130it [02:03,  1.05it/s][A
+131it [02:04,  1.06it/s][A
+132it [02:05,  1.06it/s][A
+133it [02:06,  1.06it/s][A
+134it [02:07,  1.06it/s][A
+135it [02:08,  1.06it/s][A
+136it [02:09,  1.06it/s][A
+137it [02:10,  1.05it/s][A
+138it [02:11,  1.05it/s][A
+139it [02:12,  1.05it/s][A
+140it [02:13,  1.06it/s][A
+141it [02:14,  1.06it/s][A
+142it [02:15,  1.06it/s][A
+143it [02:16,  1.06it/s][A
+144it [02:17,  1.06it/s][A
+145it [02:18,  1.06it/s][A
+146it [02:19,  1.04it/s][A
+147it [02:20,  1.05it/s][A
+148it [02:21,  1.04it/s][A
+149it [02:21,  1.05it/s][A
+150it [02:22,  1.05it/s][A
+151it [02:23,  1.06it/s][A
+152it [02:24,  1.06it/s][A
+153it [02:25,  1.06it/s][A
+154it [02:26,  1.05it/s][A
+155it [02:27,  1.05it/s][A
+156it [02:28,  1.06it/s][A
+157it [02:29,  1.06it/s][A
+158it [02:30,  1.06it/s][A
+159it [02:31,  1.05it/s][A
+160it [02:32,  1.06it/s][A
+161it [02:33,  1.06it/s][A
+162it [02:34,  1.06it/s][A
+163it [02:35,  1.07it/s][A
+164it [02:36,  1.06it/s][A
+165it [02:37,  1.06it/s][A
+166it [02:38,  1.06it/s][A
+167it [02:38,  1.06it/s][A
+168it [02:39,  1.06it/s][A
+169it [02:40,  1.06it/s][A
+170it [02:41,  1.05it/s][A
+171it [02:42,  1.05it/s][A
+172it [02:43,  1.05it/s][A
+173it [02:44,  1.05it/s][A
+174it [02:45,  1.05it/s][A
+175it [02:46,  1.06it/s][A
+176it [02:47,  1.06it/s][A
+177it [02:48,  1.06it/s][A
+178it [02:49,  1.05it/s][A
+179it [02:50,  1.06it/s][A
+180it [02:51,  1.06it/s][A
+181it [02:52,  1.05it/s][A
+182it [02:53,  1.05it/s][A
+183it [02:54,  1.05it/s][A
+184it [02:55,  1.05it/s][A
+185it [02:56,  1.05it/s][A
+186it [02:57,  1.05it/s][A
+187it [02:58,  1.05it/s][A
+188it [02:58,  1.05it/s][A
+189it [02:59,  1.06it/s][A
+190it [03:00,  1.05it/s][A
+191it [03:01,  1.05it/s][A
+192it [03:02,  1.04it/s][A
+193it [03:03,  1.05it/s][A
+194it [03:04,  1.05it/s][A
+195it [03:05,  1.05it/s][A
+196it [03:06,  1.05it/s][A
+197it [03:07,  1.05it/s][A
+198it [03:08,  1.04it/s][A
+199it [03:09,  1.05it/s][A
+200it [03:10,  1.05it/s][A
+201it [03:11,  1.05it/s][A
+202it [03:12,  1.06it/s][A
+203it [03:13,  1.05it/s][A
+204it [03:14,  1.06it/s][A
+205it [03:15,  1.06it/s][A
+206it [03:16,  1.06it/s][A
+207it [03:16,  1.06it/s][A
+208it [03:17,  1.06it/s][A
+209it [03:18,  1.06it/s][A
+210it [03:19,  1.05it/s][A
+211it [03:20,  1.05it/s][A
+212it [03:21,  1.05it/s][A
+213it [03:22,  1.06it/s][A
+214it [03:23,  1.06it/s][A
+215it [03:24,  1.04it/s][A
+216it [03:25,  1.05it/s][A
+217it [03:26,  1.04it/s][A
+218it [03:27,  1.05it/s][A
+219it [03:28,  1.06it/s][A
+220it [03:29,  1.06it/s][A
+221it [03:30,  1.06it/s][A
+222it [03:31,  1.06it/s][A
+223it [03:32,  1.06it/s][A
+224it [03:33,  1.06it/s][A
+225it [03:34,  1.06it/s][A
+226it [03:34,  1.07it/s][A
+227it [03:35,  1.06it/s][A
+228it [03:36,  1.06it/s][A
+229it [03:37,  1.07it/s][A
+230it [03:38,  1.06it/s][A
+231it [03:39,  1.05it/s][A
+232it [03:40,  1.02it/s][A
+233it [03:41,  1.03it/s][A
+234it [03:42,  1.07it/s][A
+235it [03:43,  1.05it/s][A
+236it [03:44,  1.04it/s][A
+237it [03:45,  1.03it/s][A
+238it [03:46,  1.04it/s][A
+239it [03:47,  1.05it/s][A
+240it [03:48,  1.06it/s][A
+241it [03:49,  1.05it/s][A
+242it [03:50,  1.05it/s][A
+243it [03:51,  1.05it/s][A
+244it [03:52,  1.06it/s][A
+245it [03:53,  1.06it/s][A
+246it [03:54,  1.06it/s][A
+247it [03:54,  1.06it/s][A
+248it [03:55,  1.05it/s][A
+249it [03:56,  1.05it/s][A
+250it [03:57,  1.05it/s][A
+251it [03:58,  1.05it/s][A
+252it [03:59,  1.05it/s][A
+253it [04:00,  1.06it/s][A
+254it [04:01,  1.06it/s][A
+255it [04:02,  1.05it/s][A
+256it [04:03,  1.06it/s][A
+257it [04:04,  1.06it/s][A
+258it [04:05,  1.07it/s][A
+259it [04:06,  1.07it/s][A
+260it [04:07,  1.07it/s][A
+261it [04:08,  1.06it/s][A
+262it [04:09,  1.07it/s][A
+263it [04:10,  1.07it/s][A
+264it [04:11,  1.06it/s][A
+265it [04:11,  1.06it/s][A
+266it [04:12,  1.05it/s][A
+267it [04:13,  1.05it/s][A
+268it [04:14,  1.05it/s][A
+269it [04:15,  1.05it/s][A
+270it [04:16,  1.04it/s][A
+271it [04:17,  1.04it/s][A
+272it [04:18,  1.05it/s][A
+273it [04:19,  1.05it/s][A
+274it [04:20,  1.05it/s][A
+275it [04:21,  1.06it/s][A
+276it [04:22,  1.05it/s][A
+277it [04:23,  1.05it/s][A
+278it [04:24,  1.06it/s][A
+279it [04:25,  1.06it/s][A
+280it [04:26,  1.06it/s][A
+281it [04:27,  1.06it/s][A
+282it [04:28,  1.04it/s][A
+283it [04:29,  1.05it/s][A
+284it [04:30,  1.04it/s][A
+285it [04:31,  1.04it/s][A
+286it [04:31,  1.05it/s][A
+287it [04:32,  1.06it/s][A
+288it [04:33,  1.06it/s][A
+289it [04:34,  1.06it/s][A
+290it [04:35,  1.06it/s][A
+291it [04:36,  1.06it/s][A
+292it [04:37,  1.06it/s][A
+293it [04:38,  1.05it/s][A
+294it [04:39,  1.05it/s][A
+295it [04:40,  1.05it/s][A
+296it [04:41,  1.05it/s][A
+297it [04:42,  1.06it/s][A
+298it [04:43,  1.06it/s][A
+299it [04:44,  1.05it/s][A
+300it [04:45,  1.05it/s][A
+301it [04:46,  1.05it/s][A
+302it [04:47,  1.06it/s][A
+303it [04:48,  1.06it/s][A
+304it [04:48,  1.06it/s][A
+305it [04:49,  1.06it/s][A
+306it [04:50,  1.06it/s][A
+307it [04:51,  1.06it/s][A
+308it [04:52,  1.05it/s][A
+309it [04:53,  1.05it/s][A
+310it [04:54,  1.05it/s][A
+311it [04:55,  1.04it/s][A
+312it [04:56,  1.04it/s][A
+313it [04:57,  1.04it/s][A
+314it [04:58,  1.05it/s][A
+315it [04:59,  1.05it/s][A
+316it [05:00,  1.05it/s][A
+317it [05:01,  1.04it/s][A
+318it [05:02,  1.05it/s][A
+319it [05:03,  1.05it/s][A
+320it [05:04,  1.05it/s][A
+321it [05:05,  1.05it/s][A
+322it [05:06,  1.05it/s][A
+323it [05:07,  1.05it/s][A
+324it [05:08,  1.06it/s][A
+325it [05:09,  1.06it/s][A
+326it [05:09,  1.05it/s][A
+327it [05:10,  1.05it/s][A
+328it [05:11,  1.06it/s][A
+329it [05:12,  1.06it/s][A
+330it [05:13,  1.05it/s][A
+331it [05:14,  1.05it/s][A
+332it [05:15,  1.05it/s][A
+333it [05:16,  1.05it/s][A
+334it [05:17,  1.04it/s][A
+335it [05:18,  1.04it/s][A
+336it [05:19,  1.05it/s][A
+337it [05:20,  1.05it/s][A
+338it [05:21,  1.06it/s][A
+339it [05:22,  1.06it/s][A
+340it [05:23,  1.05it/s][A
+341it [05:24,  1.03it/s][A
+342it [05:25,  1.04it/s][A
+343it [05:26,  1.04it/s][A
+344it [05:27,  1.04it/s][A
+345it [05:28,  1.04it/s][A
+346it [05:29,  1.03it/s][A
+347it [05:29,  1.07it/s][A
+348it [05:30,  1.06it/s][A
+349it [05:31,  1.06it/s][A
+350it [05:32,  1.06it/s][A
+351it [05:33,  1.06it/s][A
+352it [05:34,  1.06it/s][A
+353it [05:35,  1.06it/s][A
+354it [05:36,  1.06it/s][A
+355it [05:37,  1.05it/s][A
+356it [05:38,  1.06it/s][A
+357it [05:39,  1.05it/s][A
+358it [05:40,  1.06it/s][A
+359it [05:41,  1.06it/s][A
+360it [05:42,  1.06it/s][A
+361it [05:43,  1.05it/s][A
+362it [05:44,  1.05it/s][A
+363it [05:45,  1.06it/s][A
+364it [05:46,  1.05it/s][A
+365it [05:47,  1.05it/s][A
+366it [05:47,  1.05it/s][A
+367it [05:48,  1.06it/s][A
+368it [05:49,  1.06it/s][A
+369it [05:50,  1.09it/s][A
+370it [05:51,  1.09it/s][A
+371it [05:52,  1.08it/s][A
+372it [05:53,  1.06it/s][A
+373it [05:54,  1.06it/s][A
+374it [05:55,  1.05it/s][A
+375it [05:56,  1.06it/s][A
+376it [05:57,  1.05it/s][A
+377it [05:58,  1.05it/s][A
+378it [05:59,  1.06it/s][A
+379it [06:00,  1.05it/s][A
+380it [06:01,  1.04it/s][A
+381it [06:02,  1.04it/s][A
+382it [06:03,  1.05it/s][A
+383it [06:04,  1.05it/s][A
+384it [06:04,  1.05it/s][A
+385it [06:05,  1.05it/s][A
+386it [06:06,  1.05it/s][A
+387it [06:07,  1.05it/s][A
+388it [06:08,  1.05it/s][A
+389it [06:09,  1.05it/s][A
+390it [06:10,  1.04it/s][A
+391it [06:11,  1.05it/s][A
+392it [06:12,  1.05it/s][A
+393it [06:13,  1.05it/s][A
+394it [06:14,  1.06it/s][A
+395it [06:15,  1.05it/s][A
+396it [06:16,  1.06it/s][A
+397it [06:17,  1.05it/s][A
+398it [06:18,  1.05it/s][A
+399it [06:19,  1.05it/s][A
+400it [06:20,  1.05it/s][A
+401it [06:21,  1.06it/s][A
+402it [06:22,  1.05it/s][A
+403it [06:23,  1.05it/s][A
+404it [06:24,  1.05it/s][A
+405it [06:24,  1.05it/s][A
+406it [06:25,  1.05it/s][A
+407it [06:26,  1.05it/s][A
+408it [06:27,  1.05it/s][A
+409it [06:28,  1.05it/s][A
+410it [06:29,  1.05it/s][A
+411it [06:30,  1.05it/s][A
+412it [06:31,  1.05it/s][A
+413it [06:32,  1.06it/s][A
+414it [06:33,  1.06it/s][A
+415it [06:34,  1.06it/s][A
+416it [06:35,  1.06it/s][A
+417it [06:36,  1.05it/s][A
+418it [06:37,  1.05it/s][A
+419it [06:38,  1.05it/s][A
+420it [06:39,  1.05it/s][A
+421it [06:40,  1.05it/s][A
+422it [06:41,  1.05it/s][A
+423it [06:42,  1.05it/s][A
+424it [06:43,  1.05it/s][A
+425it [06:43,  1.05it/s][A
+426it [06:44,  1.05it/s][A
+427it [06:45,  1.05it/s][A
+428it [06:46,  1.05it/s][A
+429it [06:47,  1.05it/s][A
+430it [06:48,  1.05it/s][A
+431it [06:49,  1.04it/s][A
+432it [06:50,  1.05it/s][A
+433it [06:51,  1.06it/s][A
+434it [06:52,  1.06it/s][A
+435it [06:53,  1.06it/s][A
+436it [06:54,  1.06it/s][A
+437it [06:55,  1.05it/s][A
+438it [06:56,  1.06it/s][A
+439it [06:57,  1.06it/s][A
+440it [06:58,  1.06it/s][A
+441it [06:59,  1.06it/s][A
+442it [07:00,  1.05it/s][A
+443it [07:01,  1.03it/s][A
+444it [07:02,  1.02s/it][A
+445it [07:03,  1.01s/it][A
+446it [07:04,  1.01it/s][A
+447it [07:05,  1.02it/s][A
+448it [07:06,  1.02it/s][A
+449it [07:07,  1.02it/s][A
+450it [07:08,  1.03it/s][A
+451it [07:09,  1.04it/s][A
+452it [07:09,  1.05it/s][A
+453it [07:10,  1.05it/s][A
+454it [07:11,  1.05it/s][A
+455it [07:12,  1.05it/s][A
+456it [07:13,  1.05it/s][A
+457it [07:14,  1.08it/s][A
+458it [07:15,  1.08it/s][A
+459it [07:16,  1.06it/s][A
+460it [07:17,  1.06it/s][A
+461it [07:18,  1.06it/s][A
+462it [07:19,  1.06it/s][A
+463it [07:20,  1.10it/s][A
+464it [07:21,  1.10it/s][A
+465it [07:22,  1.07it/s][A
+466it [07:23,  1.07it/s][A
+467it [07:23,  1.07it/s][A
+468it [07:24,  1.06it/s][A
+469it [07:25,  1.06it/s][A
+470it [07:26,  1.06it/s][A
+471it [07:27,  1.05it/s][A
+472it [07:28,  1.05it/s][A
+473it [07:29,  1.05it/s][A
+474it [07:30,  1.05it/s][A
+475it [07:31,  1.06it/s][A
+476it [07:32,  1.06it/s][A
+477it [07:33,  1.05it/s][A
+478it [07:34,  1.06it/s][A
+479it [07:35,  1.06it/s][A
+480it [07:36,  1.04it/s][A
+481it [07:37,  1.04it/s][A
+482it [07:38,  1.03it/s][A
+483it [07:39,  1.04it/s][A
+484it [07:40,  1.04it/s][A
+485it [07:41,  1.05it/s][A
+486it [07:42,  1.04it/s][A
+487it [07:43,  1.04it/s][A
+488it [07:44,  1.04it/s][A
+489it [07:45,  1.04it/s][A
+490it [07:45,  1.04it/s][A
+491it [07:46,  1.04it/s][A
+492it [07:47,  1.04it/s][A
+493it [07:48,  1.04it/s][A
+494it [07:49,  1.04it/s][A
+495it [07:50,  1.04it/s][A
+496it [07:51,  1.05it/s][A
+497it [07:52,  1.05it/s][A
+498it [07:53,  1.05it/s][A
+499it [07:54,  1.05it/s][A
+500it [07:55,  1.03it/s][A
+501it [07:56,  1.04it/s][A
+502it [07:57,  1.05it/s][A
+503it [07:58,  1.05it/s][A
+504it [07:59,  1.04it/s][A
+505it [08:00,  1.04it/s][A
+506it [08:01,  1.04it/s][A
+507it [08:02,  1.03it/s][A
+508it [08:03,  1.03it/s][A
+509it [08:04,  1.04it/s][A
+510it [08:05,  1.04it/s][A
+511it [08:06,  1.08it/s][A
+512it [08:06,  1.07it/s][A
+513it [08:07,  1.06it/s][A
+514it [08:08,  1.05it/s][A
+515it [08:09,  1.05it/s][A
+516it [08:10,  1.05it/s][A
+517it [08:11,  1.04it/s][A
+518it [08:12,  1.03it/s][A
+519it [08:13,  1.03it/s][A
+520it [08:14,  1.04it/s][A
+521it [08:15,  1.04it/s][A
+522it [08:16,  1.04it/s][A
+523it [08:17,  1.04it/s][A
+524it [08:18,  1.05it/s][A
+525it [08:19,  1.05it/s][A
+526it [08:20,  1.05it/s][A
+527it [08:21,  1.05it/s][A
+528it [08:22,  1.06it/s][A
+529it [08:23,  1.05it/s][A
+530it [08:24,  1.05it/s][A
+531it [08:25,  1.05it/s][A
+532it [08:26,  1.04it/s][A
+533it [08:27,  1.04it/s][A
+534it [08:28,  1.03it/s][A
+535it [08:29,  1.04it/s][A
+536it [08:29,  1.04it/s][A
+537it [08:30,  1.04it/s][A
+538it [08:31,  1.05it/s][A
+539it [08:32,  1.06it/s][A
+540it [08:33,  1.06it/s][A
+541it [08:34,  1.06it/s][A
+542it [08:35,  1.06it/s][A
+543it [08:36,  1.06it/s][A
+544it [08:37,  1.06it/s][A
+545it [08:38,  1.06it/s][A
+546it [08:39,  1.05it/s][A
+547it [08:40,  1.01s/it][A
+548it [08:41,  1.01it/s][A
+549it [08:42,  1.02it/s][A
+550it [08:43,  1.02it/s][A
+551it [08:44,  1.02it/s][A
+552it [08:45,  1.03it/s][A
+553it [08:46,  1.04it/s][A
+554it [08:47,  1.05it/s][A
+555it [08:48,  1.06it/s][A
+556it [08:49,  1.06it/s][A
+557it [08:50,  1.07it/s][A
+558it [08:50,  1.07it/s][A
+559it [08:51,  1.05it/s][A
+560it [08:52,  1.06it/s][A
+561it [08:53,  1.05it/s][A
+562it [08:54,  1.05it/s][A
+563it [08:55,  1.05it/s][A
+564it [08:56,  1.05it/s][A
+565it [08:57,  1.04it/s][A
+566it [08:58,  1.04it/s][A
+567it [08:59,  1.05it/s][A
+568it [09:00,  1.05it/s][A
+569it [09:01,  1.05it/s][A
+570it [09:02,  1.04it/s][A
+571it [09:03,  1.04it/s][A
+572it [09:04,  1.05it/s][A
+573it [09:05,  1.05it/s][A
+574it [09:06,  1.05it/s][A
+575it [09:07,  1.05it/s][A
+576it [09:08,  1.05it/s][A
+577it [09:09,  1.05it/s][A
+578it [09:10,  1.05it/s][A
+579it [09:10,  1.09it/s][A
+580it [09:11,  1.07it/s][A
+581it [09:12,  1.07it/s][A
+582it [09:13,  1.06it/s][A
+583it [09:14,  1.05it/s][A
+584it [09:15,  1.05it/s][A
+585it [09:16,  1.05it/s][A
+586it [09:17,  1.05it/s][A
+587it [09:18,  1.04it/s][A
+588it [09:19,  1.03it/s][A
+589it [09:20,  1.03it/s][A
+590it [09:21,  1.03it/s][A
+591it [09:22,  1.04it/s][A
+592it [09:23,  1.03it/s][A
+593it [09:24,  1.04it/s][A
+594it [09:25,  1.04it/s][A
+595it [09:26,  1.05it/s][A
+596it [09:27,  1.05it/s][A
+597it [09:28,  1.05it/s][A
+598it [09:29,  1.04it/s][A
+599it [09:30,  1.04it/s][A
+600it [09:31,  1.05it/s][A600it [09:31,  1.05it/s]
+Train Epoch: 1 [0/60000 (0%)]	Loss: 282.293884
+Train Epoch: 1 [1000/60000 (2%)]	Loss: 191.374557
+Train Epoch: 1 [2000/60000 (3%)]	Loss: 374.114990
+Train Epoch: 1 [3000/60000 (5%)]	Loss: 126.138718
+Train Epoch: 1 [4000/60000 (7%)]	Loss: 319.186462
+Train Epoch: 1 [5000/60000 (8%)]	Loss: 189.333542
+Train Epoch: 1 [6000/60000 (10%)]	Loss: 126.164841
+Train Epoch: 1 [7000/60000 (12%)]	Loss: 206.832397
+Train Epoch: 1 [8000/60000 (13%)]	Loss: 420.886230
+Train Epoch: 1 [9000/60000 (15%)]	Loss: 304.080872
+Train Epoch: 1 [10000/60000 (17%)]	Loss: 151.735580
+Train Epoch: 1 [11000/60000 (18%)]	Loss: 159.397842
+Train Epoch: 1 [12000/60000 (20%)]	Loss: 109.521545
+Train Epoch: 1 [13000/60000 (22%)]	Loss: 178.063385
+Train Epoch: 1 [14000/60000 (23%)]	Loss: 1766.874512
+Train Epoch: 1 [15000/60000 (25%)]	Loss: 153.303818
+Train Epoch: 1 [16000/60000 (27%)]	Loss: 1399.595947
+Train Epoch: 1 [17000/60000 (28%)]	Loss: 148.811920
+Train Epoch: 1 [18000/60000 (30%)]	Loss: 114.109940
+Train Epoch: 1 [19000/60000 (32%)]	Loss: 113.404510
+Train Epoch: 1 [20000/60000 (33%)]	Loss: 166.321198
+Train Epoch: 1 [21000/60000 (35%)]	Loss: 142.690857
+Train Epoch: 1 [22000/60000 (37%)]	Loss: 85.567795
+Train Epoch: 1 [23000/60000 (38%)]	Loss: 116.841156
+Train Epoch: 1 [24000/60000 (40%)]	Loss: 190.041321
+Train Epoch: 1 [25000/60000 (42%)]	Loss: 133.173828
+Train Epoch: 1 [26000/60000 (43%)]	Loss: 177.639282
+Train Epoch: 1 [27000/60000 (45%)]	Loss: 117.448433
+Train Epoch: 1 [28000/60000 (47%)]	Loss: 384.618042
+Train Epoch: 1 [29000/60000 (48%)]	Loss: 300.303925
+Train Epoch: 1 [30000/60000 (50%)]	Loss: 192.940063
+Train Epoch: 1 [31000/60000 (52%)]	Loss: 224.244263
+Train Epoch: 1 [32000/60000 (53%)]	Loss: 181.677109
+Train Epoch: 1 [33000/60000 (55%)]	Loss: 192.781479
+Train Epoch: 1 [34000/60000 (57%)]	Loss: 182.430206
+Train Epoch: 1 [35000/60000 (58%)]	Loss: 135.134964
+Train Epoch: 1 [36000/60000 (60%)]	Loss: 132.542130
+Train Epoch: 1 [37000/60000 (62%)]	Loss: 253.185028
+Train Epoch: 1 [38000/60000 (63%)]	Loss: 156.593857
+Train Epoch: 1 [39000/60000 (65%)]	Loss: 172.075424
+Train Epoch: 1 [40000/60000 (67%)]	Loss: 120.411194
+Train Epoch: 1 [41000/60000 (68%)]	Loss: 182.560593
+Train Epoch: 1 [42000/60000 (70%)]	Loss: 100.190010
+Train Epoch: 1 [43000/60000 (72%)]	Loss: 108.547379
+Train Epoch: 1 [44000/60000 (73%)]	Loss: 268.574036
+Train Epoch: 1 [45000/60000 (75%)]	Loss: 112.733917
+Train Epoch: 1 [46000/60000 (77%)]	Loss: 103.166771
+Train Epoch: 1 [47000/60000 (78%)]	Loss: 1136.810059
+Train Epoch: 1 [48000/60000 (80%)]	Loss: 133.094910
+Train Epoch: 1 [49000/60000 (82%)]	Loss: 275.904236
+Train Epoch: 1 [50000/60000 (83%)]	Loss: 198.188538
+Train Epoch: 1 [51000/60000 (85%)]	Loss: 184.393494
+Train Epoch: 1 [52000/60000 (87%)]	Loss: 119.691284
+Train Epoch: 1 [53000/60000 (88%)]	Loss: 94.054825
+Train Epoch: 1 [54000/60000 (90%)]	Loss: 101.809166
+Train Epoch: 1 [55000/60000 (92%)]	Loss: 88.068954
+Train Epoch: 1 [56000/60000 (93%)]	Loss: 139.476364
+Train Epoch: 1 [57000/60000 (95%)]	Loss: 97.176178
+Train Epoch: 1 [58000/60000 (97%)]	Loss: 127.043022
+Train Epoch: 1 [59000/60000 (98%)]	Loss: 88.232864
+100%|██████████| 1/1 [09:33<00:00, 573.60s/it]100%|██████████| 1/1 [09:33<00:00, 573.60s/it]
+before test accuracy
+
+Test set: Average loss: 5.2293, Accuracy: 1260/10000 (12.6%)
+
+before test accuracy
+
+Test set: Average loss: 4.2917, Accuracy: 7793/60000 (12.988333333333333%)
+
+before test accuracy
+
+Test set: Average loss: 5.2293, Accuracy: 1260/10000 (12.6%)
+
+(False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
+(False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
+batch_size: 100, lr: 0.1, path lambda: 1.0, p: 2.0, l1: 0.0
+epochs are 1
+len train bitmap 60000
+n unique in train bitmap 2800
+len test bitmap 10000
+n unique in test bitmap 903
+test bitmap is subset of train bitmap? False
+interesection size: 621
