@@ -13,8 +13,7 @@ from typing import Tuple
 import logging
 
 class PatternDataset(torch.utils.data.Dataset):
-    def __init__(self, inputs, patterns, targets,):
-        self.inputs = inputs
+    def __init__(self, patterns, targets):
         self.patterns = patterns
         self.targets = targets
         assert(self.patterns.shape[0] == self.targets.shape[0])
