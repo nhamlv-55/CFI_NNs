@@ -10,8 +10,11 @@ import torch
 from matplotlib import pyplot as plt
 import torch.nn.functional as F
 from typing import Tuple
+import logging
+
 class PatternDataset(torch.utils.data.Dataset):
-    def __init__(self, patterns, targets):
+    def __init__(self, inputs, patterns, targets,):
+        self.inputs = inputs
         self.patterns = patterns
         self.targets = targets
         assert(self.patterns.shape[0] == self.targets.shape[0])
@@ -21,6 +24,9 @@ class PatternDataset(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         return self.patterns[idx], self.targets[idx]
 
+def bit_diff(a, b):
+    return np.logical_xor(a, b).sum()    
+    
 def get_pattern_dataset(original_dataset, new_targets, model, layers, train_kwargs):
     loader = torch.utils.data.DataLoader(original_dataset, **train_kwargs)
     patterns = test(model, torch.device('cuda'), loader, trace=True)
@@ -44,7 +50,45 @@ def train(model, device, train_loader, optimizer, epoch):
         loss.backward()
         optimizer.step()
         
+def sampling_inside_ball(n_samples, n_dim, r, p=2, origin=None, algo=2):
+    """
+    sampling N points of k-dimension inside a ball of l-p norm of radius r
+    algo1: simply sample a point, and check if it is inside the ball
+    algo2: based on https://blogs.sas.com/content/iml/2016/04/06/generate-points-uniformly-in-ball.html
+    - step 1: generate n_dim vectors, then divided by their norms. We get a bunch of vectors on the surface of the ball
+    - step 2: scales those vectors uniformly so they are of uniformly distributed distances to the center
+    """
+    res = []
+    if origin is None:
+        origin=np.zeros(n_dim)
+    if algo==1:
+        print(origin.shape)
+        tries = 0
+        while len(res)<n_samples and tries < n_samples*100:
+            tries+=1
+            new_vec = np.random.rand(n_dim)
+            norm = np.linalg.norm(new_vec, ord=p)
 
+            if norm<r:
+                res.append(new_vec+origin)
+            else:
+                print(norm)
+    elif algo==2:
+        for _ in range(n_samples):
+            new_vec = np.random.normal(0, 1, n_dim)
+            norm = np.linalg.norm(new_vec, ord=p)
+            new_vec = new_vec/norm
+            
+            d = np.random.random() ** (1/n_dim)
+            new_vec = new_vec * d * r
+            logging.debug(new_vec[:10])
+            logging.debug(origin[:10])
+            logging.debug(np.add(new_vec, origin)[:10])
+            res.append(np.add(new_vec, origin))
+            
+    return res
+        
+        
 def get_pattern(model, device, input)->dict:
     """
     Run one input through model and record activation pattern
@@ -56,12 +100,12 @@ def get_pattern(model, device, input)->dict:
 
     return tensor_log
     
-def test(model, device, test_loader, trace=False):
+def test(model, device, test_loader, trace=False, detach = True):
     model.eval()
     test_loss = 0
     correct = 0
     if trace:
-        model.register_log()
+        model.register_log(detach)
     with torch.no_grad():
         for data, target in test_loader:
             data, target = data.to(device), target.to(device)
