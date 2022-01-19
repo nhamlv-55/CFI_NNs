@@ -11,15 +11,13 @@ import copy
 import numpy as np
 
 
+
 from sklearn.decomposition import PCA
 
-import json
-import time
 
 path_penalty = .01
 p = 2
 l1_lambda = 0
-
 
 class LoggerLayer(nn.Module):
     def __init__(self, other_layer: nn.Module, log: list):
@@ -236,7 +234,7 @@ def test(model, device, test_loader, trace=False):
         test_loss, correct, len(test_loader.dataset),
         100. * correct / len(test_loader.dataset)))
 
-    return all_activation, correct/ len(test_loader.dataset)
+    return all_activation, correct/len(test_loader.dataset)
 
 
 def make_pca(all_activations):
@@ -359,7 +357,7 @@ def main():
     model.fc2.register_forward_hook(get_activation('fc2'))
 
     train_patterns,_ = test(model, device, train_loader, trace=True)
-    test_patterns, final_test_accuracy = test(model, device, test_loader, trace=True)
+    test_patterns,final_test_accuracy = test(model, device, test_loader, trace=True)
 
     train_bitmap = binarize_trace(train_patterns)
     test_bitmap = binarize_trace(test_patterns)
@@ -393,14 +391,9 @@ def main():
             for encode in tqdm(test_bitmap):
                 f.write(" ".join([str(n) for n in encode]) + "\n")
 
-    fields = "batch_size lr p path_lambda l1_lambda epochs accuracy train_paths test_paths intersection_size".split(" ")
-    values = [args.batch_size, args.lr,p,path_penalty, l1_lambda, args.epochs, final_test_accuracy, len(train_bitmap_set), len(test_bitmap_set), len(
-        test_bitmap_set.intersection(train_bitmap_set))]
+    #dump logging info
+    
 
-    result = dict(zip(fields,values))
 
-    f  = open("results/NOTHUMANREADABLE-{}.json".format(time.time()), "w")
-    f.write(json.dumps(result))
-    f.close()
 if __name__ == '__main__':
     main()

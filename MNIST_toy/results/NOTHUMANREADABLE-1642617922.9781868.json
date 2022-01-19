@@ -1,0 +1,1 @@
+{"batch_size": 10, "lr": 0.1, "p": 2.0, "path_lambda": 0.0, "l1_lambda": 0.1, "epochs": 5, "accuracy": 0.9747, "train_paths": 60000, "test_paths": 10000, "intersection_size": 0}
