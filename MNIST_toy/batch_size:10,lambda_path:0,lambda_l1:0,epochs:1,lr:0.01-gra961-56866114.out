@@ -1,0 +1,17 @@
+./main.py: line 1: from: command not found
+import: unable to open X server `' @ error/import.c/ImportImageCommand/343.
+import: unable to open X server `' @ error/import.c/ImportImageCommand/343.
+import: unable to open X server `' @ error/import.c/ImportImageCommand/343.
+import: unable to open X server `' @ error/import.c/ImportImageCommand/343.
+import: unable to open X server `' @ error/import.c/ImportImageCommand/343.
+./main.py: line 7: from: command not found
+./main.py: line 8: from: command not found
+./main.py: line 9: from: command not found
+import: unable to open X server `' @ error/import.c/ImportImageCommand/343.
+import: unable to open X server `' @ error/import.c/ImportImageCommand/343.
+./main.py: line 15: from: command not found
+./main.py: line 18: path_penalty: command not found
+./main.py: line 19: p: command not found
+./main.py: line 20: l1_lambda: command not found
+./main.py: line 22: syntax error near unexpected token `('
+./main.py: line 22: `class LoggerLayer(nn.Module):'

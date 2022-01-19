@@ -1,0 +1,5 @@
+usage: main.py [-h] [--batch-size N] [--test-batch-size N] [--epochs N]
+               [--lr LR] [--gamma M] [--no-cuda] [--dry-run] [--dump-bitmap]
+               [--seed S] [--log-interval N] [--save-model] [--p P]
+               [--lambda-pr LAMBDA_PR] [--lambda-l1 LAMBDA_L1]
+main.py: error: argument --lambda-pr: invalid float value: '.0.0001'
