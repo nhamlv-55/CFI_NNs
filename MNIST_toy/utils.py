@@ -49,6 +49,21 @@ def train(model, device, train_loader, optimizer, epoch):
         loss.backward()
         optimizer.step()
         
+def get_grad_each_label(gradient_log, target_log, layers, labels)-> dict:
+    """
+    return a dictionary of (k,v), in which k is one lable, v is a numpy array of all gradient for that particular label k
+    """
+    for l in layers:
+        logging.debug(gradient_log[l].shape)
+    res = {}
+    for label in labels:
+        res[label] = copy.deepcopy(np.concatenate([gradient_log[l][target_log == label] for l in layers], 
+                                                              axis = 1))
+        logging.info(res[label].shape)
+        
+    return res
+
+
 def sampling_inside_ball(n_samples, n_dim, r, p=2, origin=None, algo=2):
     """
     sampling N points of k-dimension inside a ball of l-p norm of radius r
@@ -205,6 +220,9 @@ def sample_pair(data_loader)-> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
     min_dist = 999999
     closest_sample = None
     for inputs, labels in data_loader:
+        #for the last batch (size maybe less than batch_size)
+        if sample_tiled.shape[0]!=inputs.shape[0]:
+            sample_tiled = sample.unsqueeze(0).repeat(inputs.shape[0], 1, 1, 1)
         dist = torch.norm(inputs - sample_tiled, dim=(2,3)).squeeze()
         local_min_dist, idx = torch.min(dist, dim = 0)
         
