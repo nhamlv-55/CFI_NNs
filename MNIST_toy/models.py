@@ -34,23 +34,41 @@ def get_activation(name, tensor_logger, detach):
             # ACTIVATION = np.concatenate((ACTIVATION, raw), axis=1)
         return hook
 
-
+def get_gradient(name, gradient_logger, detach):
+    def hook(model, grad_input, grad_output):
+        raw = grad_output
+        assert(len(raw)==1)
+        raw = raw[0].cpu().detach().numpy()
+        gradient_logger[name] = np.concatenate((gradient_logger[name], raw), axis = 0) if name in gradient_logger else raw
+        
+    return hook
 
 
 class BaseNet(nn.Module):
     def __init__(self):
         super(BaseNet, self).__init__()
         self.tensor_log = {}
+        self.gradient_log = {}
         self.hooks = []
+        self.bw_hooks = []
 
     def reset_hooks(self):
         self.tensor_log = {}
         for h in self.hooks:
             h.remove()
-
+            
+    def reset_bw_hooks(self):
+        self.input_labels = None
+        self.gradient_log = {}
+        for h in self.bw_hooks:
+            h.remove()
+            
     def register_log(self, detach):
         raise NotImplementedError
 
+    def register_gradient(self, detach):
+        raise NotImplementedError
+        
     def model_savename(self):
         raise NotImplementedError
 
@@ -70,12 +88,12 @@ class TinyCNN(BaseNet):
         x = self.conv2(x)
         x = F.relu(x)
         x = F.max_pool2d(x, 2)
-        x = self.dropout1(x)
+#         x = self.dropout1(x)
         x = torch.flatten(x, 1)
         # print(x.shape)
         x = self.fc1(x)
         x = F.relu(x)
-        x = self.dropout2(x)
+#         x = self.dropout2(x)
         x = self.fc2(x)
         output = F.log_softmax(x, dim=1)
         return output
@@ -88,8 +106,8 @@ class TinyCNN(BaseNet):
         self.hooks.append(self.fc1.register_forward_hook(get_activation('fc1', self.tensor_log, detach)))
         self.hooks.append(self.fc2.register_forward_hook(get_activation('fc2', self.tensor_log, detach)))
 
-    def model_savename(self):
-        return "TinyCNN"+datetime.now().strftime("%H:%M:%S")
+    def model_savename(self, tag=""):
+        return "TinyCNN"+tag+datetime.now().strftime("%H:%M:%S")
 
 class FeedforwardNeuralNetModel(BaseNet):
     def __init__(self, input_dim, hidden_dim, output_dim):
@@ -107,6 +125,15 @@ class FeedforwardNeuralNetModel(BaseNet):
         self.hooks.append(self.fc2.register_forward_hook(get_activation('fc2', self.tensor_log, detach)))
         self.hooks.append(self.fc3.register_forward_hook(get_activation('fc3', self.tensor_log, detach)))
         self.hooks.append(self.fc4.register_forward_hook(get_activation('fc4', self.tensor_log, detach)))
+        
+    def register_gradient(self, detach=True):
+        self.reset_bw_hooks()
+        # first layer should not make any difference?
+        self.bw_hooks.append(self.fc1.register_backward_hook(get_gradient('fc1', self.gradient_log, detach)))
+        self.bw_hooks.append(self.fc2.register_backward_hook(get_gradient('fc2', self.gradient_log, detach)))
+        self.bw_hooks.append(self.fc3.register_backward_hook(get_gradient('fc3', self.gradient_log, detach)))
+        self.bw_hooks.append(self.fc4.register_backward_hook(get_gradient('fc4', self.gradient_log, detach)))
+        
     def forward(self, x):
         out = F.relu(self.fc1(x.view(-1, 28*28)))
         out = F.relu(self.fc2(out))
