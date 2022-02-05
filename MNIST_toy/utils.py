@@ -59,7 +59,7 @@ def get_grad_each_label(gradient_log, target_log, layers, labels)-> dict:
     for label in labels:
         res[label] = copy.deepcopy(np.concatenate([gradient_log[l][target_log == label] for l in layers], 
                                                               axis = 1))
-        logging.info(res[label].shape)
+        logging.debug(res[label].shape)
         
     return res
 
