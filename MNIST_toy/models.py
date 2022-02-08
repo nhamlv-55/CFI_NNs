@@ -71,6 +71,16 @@ class BaseNet(nn.Module):
         
     def model_savename(self):
         raise NotImplementedError
+        
+    def get_pattern(self, input, layers, device, flatten = True):
+        self.eval()
+        self.register_log()
+        self.run(input.to(device))
+        tensor_log = copy.deepcopy(self.tensor_log)
+        if flatten:
+            return np.concatenate([tensor_log[l] for l in layers], axis=1)
+        return tensor_log
+    
 
 class TinyCNN(BaseNet):
     def __init__(self):
