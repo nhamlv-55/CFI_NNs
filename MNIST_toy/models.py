@@ -7,6 +7,7 @@ from torch.optim.lr_scheduler import StepLR
 import numpy as np
 import logging
 from datetime import datetime
+import copy
 # to get activation
 ACTIVATION = None
 
@@ -75,7 +76,7 @@ class BaseNet(nn.Module):
     def get_pattern(self, input, layers, device, flatten = True):
         self.eval()
         self.register_log()
-        self.run(input.to(device))
+        self.forward(input.to(device))
         tensor_log = copy.deepcopy(self.tensor_log)
         if flatten:
             return np.concatenate([tensor_log[l] for l in layers], axis=1)
