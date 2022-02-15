@@ -11,7 +11,7 @@ from matplotlib import pyplot as plt
 import torch.nn.functional as F
 from typing import Tuple
 import logging
-
+import json
 class PatternDataset(torch.utils.data.Dataset):
     def __init__(self, patterns, targets):
         self.patterns = patterns
@@ -22,7 +22,26 @@ class PatternDataset(torch.utils.data.Dataset):
 
     def __getitem__(self, idx):
         return self.patterns[idx], self.targets[idx]
-
+    
+class NpEncoder(json.JSONEncoder):
+    """
+    Helper class to save Numpy to JSON
+    Usage:
+    json.dumps(data, cls=NpEncoder)
+    Source:
+    https://stackoverflow.com/questions/50916422/python-typeerror-object-of-type-int64-is-not-json-serializable
+    """
+    def default(self, obj):
+        if isinstance(obj, np.integer):
+            return int(obj)
+        if isinstance(obj, np.floating):
+            return float(obj)
+        if isinstance(obj, np.bool_):
+            return bool(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return super(NpEncoder, self).default(obj)
+    
 def bit_diff(a, b):
     return np.logical_xor(a, b).sum()    
     
