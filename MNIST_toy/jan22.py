@@ -93,7 +93,7 @@ transform = transforms.Compose([
 # 
 # ### Condition 1: The number of activation patterns for a neural networks has to be way smaller than the size of the training/test set.
 # #### Why: 
-# 
+# epoch
 #   If every input results in a different AP, given an AP, very likely during infer time every input will have its own AP, so we have to reject it
 # 
 #   We want to verify each AP separately, so smaller the number the better
@@ -181,7 +181,7 @@ if LOAD:
     model.load_state_dict(torch.load(LOADPATH))
 else:
 
-    epochs = 1
+    epochs = 10
     optimizer = optim.Adadelta(model.parameters(), lr=lr)
 
     scheduler = StepLR(optimizer, step_size=1, gamma = 0.7)
@@ -190,6 +190,7 @@ else:
     all_rows = []
     
     for epoch in tqdm(range(1, epochs + 1)):
+        print("HEREFDAFASDFFDS")
         model.register_gradient()
         model.train()
         target_log  = None # need to record the label to match with the gradient later
@@ -404,7 +405,11 @@ def set_relu(layer : torch.nn.Module, neuron : int, always_on = True ): #set the
         #sd['weight'] = new_weights
         #sd['bias'] = new_bias
         #layer.load_state_dict(sd)
-set_relu(model.fc2,0)        
+for x in range(16):
+    set_relu(model.fc3,np.random.randint(0,64), always_on=False)      
+
 print("updated")
 [print("{}: {}".format(name,param))  for name,param in model.fc2.named_parameters()  ]
 
+torch.onnx.export(model, torch.ones(784),  "l3disabled16.onnx")
+print("complete")
