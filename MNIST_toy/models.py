@@ -14,12 +14,14 @@ ACTIVATION = None
 def get_activation(name, tensor_logger, detach, is_lastlayer = False):
     if is_lastlayer:
         def hook(model, input, output):
-            raw = torch.flatten(output, start_dim = 1, end_dim = -1).cpu().detach.numpy()
-
+            raw = torch.flatten(output, start_dim = 1, end_dim = -1).cpu().detach().numpy()
             #use argmax instead of broadcasting just in case comparing floating point is finicky
-            argmax = raw.argmax()
+            
             mask = np.zeros(raw.shape, dtype = bool)
-            mask[argmax] = True
+            
+            mask[np.arange(raw.shape[0]), raw.argmax(axis=1)] = 1
+
+            
             tensor_logger[name] = np.concatenate((tensor_logger[name], mask), 
                                                 axis = 0) if name in tensor_logger else mask
         return hook
