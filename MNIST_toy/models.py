@@ -11,7 +11,13 @@ import copy
 # to get activation
 ACTIVATION = None
 
-def get_activation(name, tensor_logger, detach):
+def get_activation(name, tensor_logger, detach, is_lastlayer = False):
+    if is_lastlayer:
+        def hook(model, input, output):
+            raw = torch.flatten(output, start_dim = 1, end_dim = -1).cpu().detach.numpy()
+            tensor_logger[name] = raw == np.max(raw)
+        return hook
+
     if detach:
         def hook(model, input, output):
             raw = torch.sigmoid(torch.flatten(
@@ -135,8 +141,8 @@ class FeedforwardNeuralNetModel(BaseNet):
         self.hooks.append(self.fc1.register_forward_hook(get_activation('fc1', self.tensor_log, detach)))
         self.hooks.append(self.fc2.register_forward_hook(get_activation('fc2', self.tensor_log, detach)))
         self.hooks.append(self.fc3.register_forward_hook(get_activation('fc3', self.tensor_log, detach)))
-        self.hooks.append(self.fc4.register_forward_hook(get_activation('fc4', self.tensor_log, detach)))
-        
+        # self.hooks.append(self.fc4.register_forward_hook(get_activation('fc4', self.tensor_log, detach)))
+        self.hooks.append(self.fc4.register_forward_hook(get_activation('fc4', self.tensor_log, detach, is_lastlayer=True)))
     def register_gradient(self, detach=True):
         self.reset_bw_hooks()
         # first layer should not make any difference?
