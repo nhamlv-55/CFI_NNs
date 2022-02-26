@@ -1,0 +1,446 @@
+  0%|          | 0/1 [00:00<?, ?it/s]/home/aweiss13/ENVS/pytorch/lib/python3.9/site-packages/torch/nn/modules/module.py:1025: UserWarning: Using a non-full backward hook when the forward contains multiple autograd Nodes is deprecated and will be removed in future versions. This hook will be missing some grad_input. Please use register_full_backward_hook to get the documented behavior.
+  warnings.warn("Using a non-full backward hook when the forward contains multiple autograd Nodes "
+root - INFO - After 1 epoch:
+root - INFO - CHECKING GRADIENT FOR LABEL 0
+root - INFO - After 1 epoch:
+root - INFO - CHECKING GRADIENT FOR LABEL 1
+root - INFO - After 1 epoch:
+root - INFO - CHECKING GRADIENT FOR LABEL 2
+root - INFO - After 1 epoch:
+root - INFO - CHECKING GRADIENT FOR LABEL 3
+root - INFO - After 1 epoch:
+root - INFO - CHECKING GRADIENT FOR LABEL 4
+root - INFO - After 1 epoch:
+root - INFO - CHECKING GRADIENT FOR LABEL 5
+root - INFO - After 1 epoch:
+root - INFO - CHECKING GRADIENT FOR LABEL 6
+root - INFO - After 1 epoch:
+root - INFO - CHECKING GRADIENT FOR LABEL 7
+root - INFO - After 1 epoch:
+root - INFO - CHECKING GRADIENT FOR LABEL 8
+root - INFO - After 1 epoch:
+root - INFO - CHECKING GRADIENT FOR LABEL 9
+100%|██████████| 1/1 [00:12<00:00, 12.97s/it]100%|██████████| 1/1 [00:12<00:00, 12.97s/it]
+
+Test set: Average loss: 2.2885, Accuracy: 1095/10000 (11%)
+
+{256, 259, 261, 264, 265, 268, 270, 273, 275, 278, 281, 285, 289, 296, 297, 298, 299, 301, 302, 305, 307, 310, 314, 315, 318, 320, 323, 325, 328, 329, 333, 337, 339, 340, 346, 91, 349, 359, 360, 361, 363, 366, 368, 370, 371, 373, 377, 378, 382, 384, 387, 390, 391, 392, 393, 396, 397, 400, 402, 404, 405, 406, 407, 408, 409, 410, 413, 415, 417, 419, 421, 422, 424, 426, 427, 428, 429, 430, 431, 176, 432, 434, 435, 436, 437, 438, 441, 445, 190, 446, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457}
+100
+{259, 261, 264, 265, 272, 273, 275, 277, 278, 283, 284, 285, 286, 294, 295, 297, 298, 299, 302, 304, 305, 306, 307, 308, 309, 314, 317, 320, 323, 329, 330, 331, 334, 335, 339, 341, 86, 349, 352, 356, 357, 358, 360, 362, 363, 366, 367, 368, 377, 379, 384, 388, 389, 391, 392, 395, 396, 397, 398, 400, 402, 404, 405, 406, 407, 408, 409, 410, 413, 414, 415, 417, 419, 421, 422, 424, 426, 427, 429, 431, 432, 435, 436, 437, 438, 439, 442, 443, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 228}
+100
+{384, 259, 261, 391, 264, 265, 392, 396, 397, 400, 273, 402, 275, 404, 405, 278, 406, 407, 408, 409, 410, 285, 413, 415, 417, 419, 421, 422, 424, 297, 298, 299, 426, 427, 302, 429, 431, 305, 432, 307, 435, 436, 437, 438, 314, 320, 448, 449, 323, 450, 451, 452, 453, 454, 329, 455, 456, 457, 339, 349, 360, 363, 366, 368, 377}
+K= 25
+There are 25 stable grad in top K
+[388 398 400 404 405 408 415 417 421 429 430 431 432 434 439 448 449 450
+ 451 452 453 454 455 456 457]
+root - INFO - (5923, 458)
+LABEL: 0
+how many unique paths in the full pattern? (5923, 458)
+how many unique paths in the filtered pattern? (1909, 25)
+how many unique paths in the randomly filtered pattern? (4260, 25)
+There are 25 stable grad in top K
+[387 397 400 404 406 408 413 419 421 424 426 430 432 435 438 448 449 450
+ 451 452 453 454 455 456 457]
+root - INFO - (6742, 458)
+LABEL: 1
+how many unique paths in the full pattern? (6742, 458)
+how many unique paths in the filtered pattern? (381, 25)
+how many unique paths in the randomly filtered pattern? (2054, 25)
+There are 25 stable grad in top K
+[387 391 404 406 410 424 426 427 429 431 432 434 435 437 439 448 449 450
+ 451 452 453 454 455 456 457]
+root - INFO - (5958, 458)
+LABEL: 2
+how many unique paths in the full pattern? (5958, 458)
+how many unique paths in the filtered pattern? (2349, 25)
+how many unique paths in the randomly filtered pattern? (5532, 25)
+There are 25 stable grad in top K
+[387 391 397 398 400 402 404 405 414 421 426 427 430 432 437 448 449 450
+ 451 452 453 454 455 456 457]
+root - INFO - (6131, 458)
+LABEL: 3
+how many unique paths in the full pattern? (6131, 458)
+how many unique paths in the filtered pattern? (2956, 25)
+how many unique paths in the randomly filtered pattern? (4437, 25)
+There are 25 stable grad in top K
+[391 405 406 408 410 419 421 422 424 426 427 432 434 438 446 448 449 450
+ 451 452 453 454 455 456 457]
+root - INFO - (5842, 458)
+LABEL: 4
+how many unique paths in the full pattern? (5842, 458)
+how many unique paths in the filtered pattern? (1692, 25)
+how many unique paths in the randomly filtered pattern? (4695, 25)
+There are 25 stable grad in top K
+[275 391 400 404 405 406 410 424 426 429 432 434 435 438 439 448 449 450
+ 451 452 453 454 455 456 457]
+root - INFO - (5421, 458)
+LABEL: 5
+how many unique paths in the full pattern? (5421, 458)
+how many unique paths in the filtered pattern? (1443, 25)
+how many unique paths in the randomly filtered pattern? (4739, 25)
+There are 25 stable grad in top K
+[391 395 400 402 404 406 408 421 426 427 431 432 436 437 438 448 449 450
+ 451 452 453 454 455 456 457]
+root - INFO - (5918, 458)
+LABEL: 6
+how many unique paths in the full pattern? (5918, 458)
+how many unique paths in the filtered pattern? (1683, 25)
+how many unique paths in the randomly filtered pattern? (4439, 25)
+There are 25 stable grad in top K
+[389 391 392 396 400 402 406 407 408 419 421 427 436 438 439 448 449 450
+ 451 452 453 454 455 456 457]
+root - INFO - (6265, 458)
+LABEL: 7
+how many unique paths in the full pattern? (6265, 458)
+how many unique paths in the filtered pattern? (1487, 25)
+how many unique paths in the randomly filtered pattern? (3531, 25)
+There are 25 stable grad in top K
+[387 389 391 397 398 406 410 415 419 421 426 432 434 437 438 448 449 450
+ 451 452 453 454 455 456 457]
+root - INFO - (5851, 458)
+LABEL: 8
+how many unique paths in the full pattern? (5851, 458)
+how many unique paths in the filtered pattern? (2957, 25)
+how many unique paths in the randomly filtered pattern? (3552, 25)
+There are 25 stable grad in top K
+[339 384 389 392 404 405 406 410 419 421 422 424 426 432 438 448 449 450
+ 451 452 453 454 455 456 457]
+root - INFO - (5949, 458)
+LABEL: 9
+how many unique paths in the full pattern? (5949, 458)
+how many unique paths in the filtered pattern? (1112, 25)
+how many unique paths in the randomly filtered pattern? (4684, 25)
+K= 50
+There are 50 stable grad in top K
+[259 270 280 283 294 295 296 311 342 352 364 377 388 389 396 397 398 400
+ 402 404 405 406 408 410 414 415 417 421 429 430 431 432 434 437 438 439
+ 440 445 446 447 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (5923, 458)
+LABEL: 0
+how many unique paths in the full pattern? (5923, 458)
+how many unique paths in the filtered pattern? (5875, 50)
+how many unique paths in the randomly filtered pattern? (5902, 50)
+There are 50 stable grad in top K
+[256 261 270 285 296 302 305 340 359 360 363 366 368 384 387 391 396 397
+ 400 402 404 405 406 408 413 417 419 421 422 424 426 429 430 431 432 434
+ 435 436 438 446 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (6742, 458)
+LABEL: 1
+how many unique paths in the full pattern? (6742, 458)
+how many unique paths in the filtered pattern? (3920, 50)
+how many unique paths in the randomly filtered pattern? (5874, 50)
+There are 50 stable grad in top K
+[256 273 275 280 301 317 335 337 368 371 387 391 395 398 402 404 406 407
+ 409 410 413 414 415 419 422 424 426 427 429 430 431 432 434 435 437 438
+ 439 440 441 446 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (5958, 458)
+LABEL: 2
+how many unique paths in the full pattern? (5958, 458)
+how many unique paths in the filtered pattern? (5954, 50)
+how many unique paths in the randomly filtered pattern? (5956, 50)
+There are 50 stable grad in top K
+[261 264 280 320 324 340 358 359 364 366 387 391 392 397 398 400 402 404
+ 405 406 407 409 413 414 415 417 421 422 426 427 429 430 432 435 436 437
+ 439 440 441 447 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (6131, 458)
+LABEL: 3
+how many unique paths in the full pattern? (6131, 458)
+how many unique paths in the filtered pattern? (6111, 50)
+how many unique paths in the randomly filtered pattern? (6129, 50)
+There are 50 stable grad in top K
+[261 265 273 298 302 318 323 349 360 377 384 387 389 391 396 397 398 399
+ 405 406 408 410 413 417 419 421 422 424 426 427 431 432 434 435 436 438
+ 439 440 443 446 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (5842, 458)
+LABEL: 4
+how many unique paths in the full pattern? (5842, 458)
+how many unique paths in the filtered pattern? (5794, 50)
+how many unique paths in the randomly filtered pattern? (5842, 50)
+There are 50 stable grad in top K
+[275 302 307 315 317 329 352 358 360 366 384 387 391 392 395 396 400 404
+ 405 406 407 409 410 414 419 424 426 427 429 430 431 432 434 435 436 438
+ 439 440 445 447 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (5421, 458)
+LABEL: 5
+how many unique paths in the full pattern? (5421, 458)
+how many unique paths in the filtered pattern? (5382, 50)
+how many unique paths in the randomly filtered pattern? (5413, 50)
+There are 50 stable grad in top K
+[256 277 283 284 296 314 315 342 355 359 368 377 378 387 389 391 395 396
+ 397 399 400 402 404 406 408 409 410 415 421 424 426 427 429 430 431 432
+ 436 437 438 443 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (5918, 458)
+LABEL: 6
+how many unique paths in the full pattern? (5918, 458)
+how many unique paths in the filtered pattern? (5600, 50)
+how many unique paths in the randomly filtered pattern? (5856, 50)
+There are 50 stable grad in top K
+[277 284 285 299 302 314 358 366 367 384 388 389 391 392 395 396 397 398
+ 400 402 404 405 406 407 408 409 413 414 417 419 421 422 427 429 432 436
+ 437 438 439 442 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (6265, 458)
+LABEL: 7
+how many unique paths in the full pattern? (6265, 458)
+how many unique paths in the filtered pattern? (5920, 50)
+how many unique paths in the randomly filtered pattern? (6197, 50)
+There are 50 stable grad in top K
+[259 275 277 281 298 302 306 307 314 317 318 321 335 340 387 389 391 395
+ 396 397 398 399 406 407 408 409 410 415 419 421 426 427 429 432 434 435
+ 437 438 440 446 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (5851, 458)
+LABEL: 8
+how many unique paths in the full pattern? (5851, 458)
+how many unique paths in the filtered pattern? (5821, 50)
+how many unique paths in the randomly filtered pattern? (5846, 50)
+There are 50 stable grad in top K
+[284 286 287 294 298 306 307 339 377 384 387 388 389 390 392 396 397 399
+ 402 404 405 406 409 410 414 415 417 419 421 422 424 426 427 428 430 432
+ 434 438 442 446 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (5949, 458)
+LABEL: 9
+how many unique paths in the full pattern? (5949, 458)
+how many unique paths in the filtered pattern? (5772, 50)
+how many unique paths in the randomly filtered pattern? (5934, 50)
+K= 100
+There are 100 stable grad in top K
+[110 258 259 261 264 265 268 270 275 277 280 283 284 285 286 287 291 294
+ 295 296 298 302 303 307 309 311 314 315 318 325 329 331 337 339 340 342
+ 352 358 359 360 362 363 364 365 366 369 377 378 384 385 387 388 389 390
+ 392 395 396 397 398 400 402 404 405 406 408 409 410 413 414 415 417 420
+ 421 422 424 429 430 431 432 434 436 437 438 439 440 442 443 445 446 447
+ 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (5923, 458)
+LABEL: 0
+how many unique paths in the full pattern? (5923, 458)
+how many unique paths in the filtered pattern? (5923, 100)
+how many unique paths in the randomly filtered pattern? (5923, 100)
+There are 100 stable grad in top K
+[ 91 176 190 256 259 261 264 265 268 270 273 275 278 281 285 289 296 297
+ 298 299 301 302 305 307 310 314 315 318 320 323 325 328 329 333 337 339
+ 340 346 349 359 360 361 363 366 368 370 371 373 377 378 382 384 387 390
+ 391 392 393 396 397 400 402 404 405 406 407 408 409 410 413 415 417 419
+ 421 422 424 426 427 428 429 430 431 432 434 435 436 437 438 441 445 446
+ 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (6742, 458)
+LABEL: 1
+how many unique paths in the full pattern? (6742, 458)
+how many unique paths in the filtered pattern? (6711, 100)
+how many unique paths in the randomly filtered pattern? (6736, 100)
+There are 100 stable grad in top K
+[256 259 261 264 265 270 272 273 275 280 284 285 286 296 297 298 299 301
+ 302 303 304 307 309 314 315 317 318 320 331 333 335 337 339 340 342 343
+ 347 349 352 355 356 357 358 359 360 363 364 365 366 368 371 378 387 391
+ 392 395 396 398 399 400 402 404 405 406 407 408 409 410 413 414 415 419
+ 422 424 425 426 427 429 430 431 432 434 435 436 437 438 439 440 441 446
+ 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (5958, 458)
+LABEL: 2
+how many unique paths in the full pattern? (5958, 458)
+how many unique paths in the filtered pattern? (5958, 100)
+how many unique paths in the randomly filtered pattern? (5958, 100)
+There are 100 stable grad in top K
+[258 259 261 264 265 268 270 275 277 280 283 285 286 287 289 294 295 296
+ 298 301 302 306 307 313 315 318 320 324 328 329 331 335 337 339 340 342
+ 349 352 354 358 359 360 363 364 365 366 368 369 377 379 384 387 391 392
+ 395 396 397 398 399 400 402 404 405 406 407 409 413 414 415 417 419 421
+ 422 424 426 427 428 429 430 432 435 436 437 438 439 440 441 445 446 447
+ 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (6131, 458)
+LABEL: 3
+how many unique paths in the full pattern? (6131, 458)
+how many unique paths in the filtered pattern? (6131, 100)
+how many unique paths in the randomly filtered pattern? (6131, 100)
+There are 100 stable grad in top K
+[ 88 256 258 259 261 265 268 269 270 273 275 277 282 284 285 286 287 294
+ 295 297 298 302 303 305 306 313 314 317 318 320 321 323 328 330 339 340
+ 342 349 356 358 360 361 363 365 367 368 369 373 376 377 378 379 384 387
+ 388 389 391 392 395 396 397 398 399 404 405 406 408 410 413 415 417 419
+ 421 422 424 425 426 427 431 432 434 435 436 438 439 440 443 445 446 447
+ 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (5842, 458)
+LABEL: 4
+how many unique paths in the full pattern? (5842, 458)
+how many unique paths in the filtered pattern? (5842, 100)
+how many unique paths in the randomly filtered pattern? (5842, 100)
+There are 100 stable grad in top K
+[258 259 261 264 265 268 272 273 274 275 276 277 280 283 284 289 291 293
+ 294 298 299 301 302 306 307 312 314 315 317 318 320 323 329 330 335 337
+ 339 340 349 352 357 358 359 360 363 364 366 368 376 377 384 387 388 389
+ 391 392 395 396 397 399 400 402 404 405 406 407 409 410 414 415 419 421
+ 424 426 427 429 430 431 432 434 435 436 437 438 439 440 443 445 446 447
+ 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (5421, 458)
+LABEL: 5
+how many unique paths in the full pattern? (5421, 458)
+how many unique paths in the filtered pattern? (5421, 100)
+how many unique paths in the randomly filtered pattern? (5421, 100)
+There are 100 stable grad in top K
+[253 256 258 261 264 265 268 272 273 275 277 283 284 285 287 290 294 296
+ 298 299 302 304 306 307 309 314 315 318 323 327 329 330 333 337 340 342
+ 346 352 354 355 357 358 359 360 363 365 366 367 368 369 373 377 378 387
+ 388 389 391 392 395 396 397 399 400 402 404 406 407 408 409 410 415 421
+ 424 426 427 428 429 430 431 432 434 435 436 437 438 439 440 441 443 446
+ 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (5918, 458)
+LABEL: 6
+how many unique paths in the full pattern? (5918, 458)
+how many unique paths in the filtered pattern? (5918, 100)
+how many unique paths in the randomly filtered pattern? (5918, 100)
+There are 100 stable grad in top K
+[ 86 228 259 261 264 265 272 273 275 277 278 283 284 285 286 294 295 297
+ 298 299 302 304 305 306 307 308 309 314 317 320 323 329 330 331 334 335
+ 339 341 349 352 356 357 358 360 362 363 366 367 368 377 379 384 388 389
+ 391 392 395 396 397 398 400 402 404 405 406 407 408 409 410 413 414 415
+ 417 419 421 422 424 426 427 429 431 432 435 436 437 438 439 442 443 447
+ 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (6265, 458)
+LABEL: 7
+how many unique paths in the full pattern? (6265, 458)
+how many unique paths in the filtered pattern? (6259, 100)
+how many unique paths in the randomly filtered pattern? (6265, 100)
+There are 100 stable grad in top K
+[210 256 259 261 265 268 270 272 275 277 280 281 283 284 285 286 290 294
+ 298 302 303 306 307 313 314 317 318 321 323 324 328 329 335 337 339 340
+ 342 349 352 354 358 359 360 363 364 365 366 368 373 377 378 384 387 389
+ 391 392 394 395 396 397 398 399 400 404 405 406 407 408 409 410 414 415
+ 419 421 422 424 426 427 429 430 432 434 435 437 438 439 440 444 445 446
+ 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (5851, 458)
+LABEL: 8
+how many unique paths in the full pattern? (5851, 458)
+how many unique paths in the filtered pattern? (5851, 100)
+how many unique paths in the randomly filtered pattern? (5851, 100)
+There are 100 stable grad in top K
+[ 73 188 256 259 264 268 273 275 276 277 283 284 286 287 294 295 296 297
+ 298 302 304 306 307 317 318 320 321 323 329 330 332 337 339 340 342 346
+ 349 352 353 357 358 359 360 363 366 368 369 376 377 378 379 383 384 387
+ 388 389 390 391 392 396 397 399 402 404 405 406 407 408 409 410 414 415
+ 417 419 421 422 424 426 427 428 429 430 432 434 435 438 440 441 442 446
+ 448 449 450 451 452 453 454 455 456 457]
+root - INFO - (5949, 458)
+LABEL: 9
+how many unique paths in the full pattern? (5949, 458)
+how many unique paths in the filtered pattern? (5949, 100)
+how many unique paths in the randomly filtered pattern? (5949, 100)
+(5923, 458)
+how many unique paths in the filtered pattern? (3, 8)
+[374 375 401 412 418 449 404 457]
+5923
+(6742, 458)
+how many unique paths in the filtered pattern? (12, 19)
+[161 374 375 386 401 403 411 412 423 433 449 452 277 302 339 366 404 438
+ 457]
+6742
+(5958, 458)
+how many unique paths in the filtered pattern? (2, 5)
+[401 449 277 404 457]
+5958
+(6131, 458)
+how many unique paths in the filtered pattern? (3, 9)
+[374 375 401 411 412 449 277 404 457]
+6131
+(5842, 458)
+how many unique paths in the filtered pattern? (4, 7)
+[374 401 403 449 277 404 457]
+5842
+(5421, 458)
+how many unique paths in the filtered pattern? (2, 7)
+[374 375 401 412 449 404 457]
+5421
+(5918, 458)
+how many unique paths in the filtered pattern? (7, 9)
+[374 401 412 418 449 452 456 404 457]
+5918
+(6265, 458)
+how many unique paths in the filtered pattern? (6, 9)
+[375 401 403 412 449 452 277 404 457]
+6265
+(5851, 458)
+how many unique paths in the filtered pattern? (4, 7)
+[401 412 449 277 363 404 457]
+5851
+(5949, 458)
+how many unique paths in the filtered pattern? (5, 9)
+[374 401 403 411 412 449 277 404 457]
+5949
+{449, 401, 457, 404} 4
+root - INFO - (1135, 458)
+LABEL: 1
+how many unique paths in the full pattern? (1135, 458)
+how many unique paths in the filtered pattern? (5, 19)
+how many unique paths in the randomly filtered pattern? (531, 19)
+(12, 19)
+(5, 19)
+12 5
+4
+here
+tensor([ 1.0000e+00,  1.5418e-03, -5.8596e-02, -5.8620e-03, -6.4838e-03,
+        -4.6349e-03, -4.7015e-03, -3.7860e-02, -3.8437e-02,  2.1297e-02,
+         5.1024e-02, -2.6697e-02,  3.0539e-02, -1.9294e-02,  3.4197e-02,
+        -2.7205e-02,  2.7779e-02,  1.9251e-02, -5.2047e-02, -1.6887e-02,
+        -5.7112e-02,  3.7405e-02, -4.7605e-02, -4.6577e-02, -2.3956e-02,
+        -3.1287e-02, -5.0364e-02,  2.1155e-02, -2.7593e-02, -6.0560e-02,
+         1.8249e-02, -2.3045e-04,  2.0962e-03,  5.8912e-03, -2.5905e-02,
+        -8.3346e-05,  1.9501e-02, -5.3878e-02,  8.3067e-03, -5.0128e-02,
+        -2.5744e-03, -5.3310e-02, -1.3733e-02,  4.6094e-02,  3.1053e-02,
+        -2.9613e-02,  4.7898e-02,  8.1764e-03, -1.5379e-02,  3.1959e-02,
+        -2.8621e-02,  3.0214e-02, -5.8812e-02, -2.4364e-03, -9.0031e-03,
+        -3.7810e-02, -3.0884e-02,  4.2270e-02, -1.2694e-02,  1.0120e-02,
+         1.3483e-02,  1.5858e-02,  3.2134e-02,  5.1865e-02, -3.6163e-02,
+         3.0040e-02,  7.0294e-03, -1.3392e-02,  1.6829e-03, -5.2069e-02,
+        -2.9348e-02,  7.0461e-03,  2.0661e-02, -7.9540e-03, -1.4308e-02,
+         2.0449e-02, -5.7409e-03,  3.7307e-02, -5.0491e-02, -2.3159e-02,
+        -6.1190e-02,  1.7617e-02,  3.3652e-03,  3.8734e-02,  5.5243e-02,
+        -4.0716e-02, -3.7781e-02,  2.6758e-02, -4.9311e-02,  1.1413e-03,
+         3.7402e-02, -1.9597e-02, -2.7141e-02, -3.4978e-02,  1.2729e-02,
+         5.6282e-04,  2.4370e-02, -2.8480e-02, -1.2438e-02,  4.6194e-02,
+         4.2344e-02, -2.5493e-02, -2.1358e-02, -5.4208e-02, -4.7038e-02,
+         1.1207e-02,  1.8692e-02, -1.2788e-02, -4.5804e-02,  1.4248e-02,
+         4.5618e-02,  1.4156e-02,  4.2203e-02, -4.1643e-02, -1.9005e-02,
+         4.0376e-02, -4.2899e-02, -2.2867e-02,  4.2770e-02, -5.7429e-02,
+         4.4056e-02,  1.5275e-02, -3.7156e-02, -1.3556e-02,  2.6748e-02,
+        -1.1347e-02,  6.3106e-03, -7.6582e-04])
+tensor([[ 0.0000,  0.0000,  0.0000,  ...,  0.0000,  0.0000,  0.0000],
+        [-0.0536,  0.0371, -0.0489,  ..., -0.0181,  0.0212, -0.0216],
+        [-0.0236, -0.0419,  0.0263,  ...,  0.0415,  0.0178, -0.0384],
+        ...,
+        [ 0.0287, -0.0309,  0.0263,  ..., -0.0568,  0.0393,  0.0193],
+        [ 0.0345, -0.0279,  0.0447,  ..., -0.0193,  0.0293, -0.0478],
+        [ 0.0515,  0.0014, -0.0334,  ..., -0.0181,  0.0210, -0.0542]])
+updated
+weight: Parameter containing:
+tensor([[ 0.0000,  0.0000,  0.0000,  ...,  0.0000,  0.0000,  0.0000],
+        [-0.0536,  0.0371, -0.0489,  ..., -0.0181,  0.0212, -0.0216],
+        [-0.0236, -0.0419,  0.0263,  ...,  0.0415,  0.0178, -0.0384],
+        ...,
+        [ 0.0287, -0.0309,  0.0263,  ..., -0.0568,  0.0393,  0.0193],
+        [ 0.0345, -0.0279,  0.0447,  ..., -0.0193,  0.0293, -0.0478],
+        [ 0.0515,  0.0014, -0.0334,  ..., -0.0181,  0.0210, -0.0542]],
+       requires_grad=True)
+bias: Parameter containing:
+tensor([ 1.0000e+00,  1.5418e-03, -5.8596e-02, -5.8620e-03, -6.4838e-03,
+        -4.6349e-03, -4.7015e-03, -3.7860e-02, -3.8437e-02,  2.1297e-02,
+         5.1024e-02, -2.6697e-02,  3.0539e-02, -1.9294e-02,  3.4197e-02,
+        -2.7205e-02,  2.7779e-02,  1.9251e-02, -5.2047e-02, -1.6887e-02,
+        -5.7112e-02,  3.7405e-02, -4.7605e-02, -4.6577e-02, -2.3956e-02,
+        -3.1287e-02, -5.0364e-02,  2.1155e-02, -2.7593e-02, -6.0560e-02,
+         1.8249e-02, -2.3045e-04,  2.0962e-03,  5.8912e-03, -2.5905e-02,
+        -8.3346e-05,  1.9501e-02, -5.3878e-02,  8.3067e-03, -5.0128e-02,
+        -2.5744e-03, -5.3310e-02, -1.3733e-02,  4.6094e-02,  3.1053e-02,
+        -2.9613e-02,  4.7898e-02,  8.1764e-03, -1.5379e-02,  3.1959e-02,
+        -2.8621e-02,  3.0214e-02, -5.8812e-02, -2.4364e-03, -9.0031e-03,
+        -3.7810e-02, -3.0884e-02,  4.2270e-02, -1.2694e-02,  1.0120e-02,
+         1.3483e-02,  1.5858e-02,  3.2134e-02,  5.1865e-02, -3.6163e-02,
+         3.0040e-02,  7.0294e-03, -1.3392e-02,  1.6829e-03, -5.2069e-02,
+        -2.9348e-02,  7.0461e-03,  2.0661e-02, -7.9540e-03, -1.4308e-02,
+         2.0449e-02, -5.7409e-03,  3.7307e-02, -5.0491e-02, -2.3159e-02,
+        -6.1190e-02,  1.7617e-02,  3.3652e-03,  3.8734e-02,  5.5243e-02,
+        -4.0716e-02, -3.7781e-02,  2.6758e-02, -4.9311e-02,  1.1413e-03,
+         3.7402e-02, -1.9597e-02, -2.7141e-02, -3.4978e-02,  1.2729e-02,
+         5.6282e-04,  2.4370e-02, -2.8480e-02, -1.2438e-02,  4.6194e-02,
+         4.2344e-02, -2.5493e-02, -2.1358e-02, -5.4208e-02, -4.7038e-02,
+         1.1207e-02,  1.8692e-02, -1.2788e-02, -4.5804e-02,  1.4248e-02,
+         4.5618e-02,  1.4156e-02,  4.2203e-02, -4.1643e-02, -1.9005e-02,
+         4.0376e-02, -4.2899e-02, -2.2867e-02,  4.2770e-02, -5.7429e-02,
+         4.4056e-02,  1.5275e-02, -3.7156e-02, -1.3556e-02,  2.6748e-02,
+        -1.1347e-02,  6.3106e-03, -7.6582e-04], requires_grad=True)

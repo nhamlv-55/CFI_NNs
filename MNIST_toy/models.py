@@ -153,7 +153,7 @@ class FeedforwardNeuralNetModel(BaseNet):
         out = F.log_softmax(out, dim=1)
         return out
     def model_savename(self):
-        return "FFN"+datetime.now().strftime("%H:%M:%S")
+        return "FFN"+datetime.now().strftime("%H-%M-%S")
 
 class PatternClassifier(BaseNet):
     def __init__(self, input_dim, max_unit, output_dim):
