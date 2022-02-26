@@ -15,19 +15,23 @@ def get_activation(name, tensor_logger, detach, is_lastlayer = False):
     if is_lastlayer:
         def hook(model, input, output):
             raw = torch.flatten(output, start_dim = 1, end_dim = -1).cpu().detach.numpy()
-            tensor_logger[name] = raw == np.max(raw)
+
+            #use argmax instead of broadcasting just in case comparing floating point is finicky
+            argmax = raw.argmax()
+            mask = np.zeros(raw.shape, dtype = bool)
+            mask[argmax] = True
+            tensor_logger[name] = mask
         return hook
 
     if detach:
         def hook(model, input, output):
-            raw = torch.sigmoid(torch.flatten(
-                output, start_dim=1, end_dim=-1)).cpu().detach().numpy()
-            raw = raw > 0.5 #need to convert here, because float takes a lot more memory
+            raw = torch.flatten(
+                output, start_dim=1, end_dim=-1).cpu().detach().numpy()
+            raw = raw > 0
             logging.debug("{}, {}".format(name,raw.shape))
             tensor_logger[name] = np.concatenate((tensor_logger[name], raw), 
                                                 axis = 0) if name in tensor_logger else raw
             logging.debug(tensor_logger[name].shape)
-            # ACTIVATION = np.concatenate((ACTIVATION, raw), axis=1)
         return hook
     else:
         #keep the gradient, so cannot convert to bit here
@@ -38,7 +42,6 @@ def get_activation(name, tensor_logger, detach, is_lastlayer = False):
             tensor_logger[name] = torch.cat((tensor_logger[name], raw), 
                                                 axis = 0) if name in tensor_logger else raw
             logging.debug(tensor_logger[name].shape)
-            # ACTIVATION = np.concatenate((ACTIVATION, raw), axis=1)
         return hook
 
 def get_gradient(name, gradient_logger, detach):
