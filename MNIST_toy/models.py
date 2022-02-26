@@ -20,7 +20,8 @@ def get_activation(name, tensor_logger, detach, is_lastlayer = False):
             argmax = raw.argmax()
             mask = np.zeros(raw.shape, dtype = bool)
             mask[argmax] = True
-            tensor_logger[name] = mask
+            tensor_logger[name] = np.concatenate((tensor_logger[name], mask), 
+                                                axis = 0) if name in tensor_logger else mask
         return hook
 
     if detach:
