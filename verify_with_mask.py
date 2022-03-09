@@ -64,10 +64,10 @@ def verify(data_loader, eps):
 
 
     wrapped_model = LiRPAConvNet(model, pred = y, test = None, in_size = (1, 28, 28), device='cuda', c = c)
-    ball = auto_LiRPA.PerturbationLpNorm(eps=eps)
     data_ub = target + eps
     data_lb = target - eps
 
+    ball = auto_LiRPA.PerturbationLpNorm(eps=eps, x_L=data_lb.to(device), x_U = data_ub.to(device))
     if list(wrapped_model.net.parameters())[0].is_cuda:
         print("cuda")
         target = target.cuda()
@@ -86,4 +86,4 @@ def verify(data_loader, eps):
     print(res)
 if __name__ == "__main__":
     config_args()
-    verify(test_loader, eps = 0.3)
+    verify(test_loader, eps = 0.16)
