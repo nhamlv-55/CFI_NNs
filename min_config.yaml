@@ -1,0 +1,14 @@
+general:
+  mode: verified-acc
+  enable_incomplete_verification: False
+specification:
+  epsilon: 0.0003
+solver:
+  beta-crown:
+    batch_size: 300
+    iteration: 20
+bab:
+  timeout: 180
+  decision_thresh: 99999999
+  branching:
+    reduceop: max
