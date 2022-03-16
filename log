@@ -1,0 +1,2193 @@
+Configurations:
+
+general:
+  device: cuda
+  seed: 100
+  conv_mode: patches
+  deterministic: false
+  double_fp: false
+  loss_reduction_func: sum
+  record_bounds: false
+  mode: verified-acc
+  complete_verifier: bab
+  enable_incomplete_verification: false
+  get_crown_verified_acc: false
+  csv_name: null
+  onnx_path: null
+  vnnlib_path: null
+  results_file: null
+  root_path: null
+model:
+  path: null
+  name: mnist_9_200
+data:
+  start: 0
+  end: 10000
+  num_outputs: 10
+  mean: 0.0
+  std: 1.0
+  pkl_path: null
+  dataset: CIFAR
+  data_filter_path: null
+specification:
+  type: lp
+  norm: .inf
+  epsilon: 0.15
+solver:
+  alpha-crown:
+    lr_alpha: 0.1
+    iteration: 100
+    share_slopes: false
+    no_joint_opt: false
+  beta-crown:
+    batch_size: 300
+    lr_alpha: 0.01
+    lr_beta: 0.05
+    lr_decay: 0.98
+    optimizer: adam
+    iteration: 20
+    beta: true
+    beta_warmup: true
+  mip:
+    parallel_solvers: null
+    solver_threads: 1
+    refine_neuron_timeout: 15
+    refine_neuron_time_percentage: 0.8
+    early_stop: true
+bab:
+  max_domains: 200000
+  decision_thresh: 99999999
+  timeout: 180
+  get_upper_bound: false
+  dfs_percent: 0.0
+  branching:
+    method: kfsb
+    candidates: 3
+    reduceop: max
+attack:
+  pgd_order: before
+  enable_mip_attack: false
+  pgd_steps: 100
+  pgd_restarts: 30
+  pgd_early_stop: true
+  pgd_lr_decay: 0.99
+  pgd_alpha: auto
+debug:
+  lp_test: null
+
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+           Flatten-1                    [-1, 4]               0
+            Linear-2                    [-1, 3]              15
+              ReLU-3                    [-1, 3]               0
+            Linear-4                    [-1, 5]              20
+              ReLU-5                    [-1, 5]               0
+            Linear-6                    [-1, 3]              18
+================================================================
+Total params: 53
+Trainable params: 53
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.00
+Forward/backward pass size (MB): 0.00
+Params size (MB): 0.00
+Estimated Total Size (MB): 0.00
+----------------------------------------------------------------
+X tensor([[ 0.4131,  0.0548, -0.4154, -0.4171]], device='cuda:0')
+tensor([[-0.2128, -0.0744, -0.6103]], device='cuda:0', grad_fn=<AddmmBackward>)
+Trying to verify that the network will never predict 2 upon seeing 1
+C tensor([[[ 0.,  1., -1.]]], device='cuda:0')
+domain torch.Size([1, 4, 2])
+INIT_SLOPE X SHAPE 1 (1, 1, 4)
+L tensor([[0.4936]], device='cuda:0')
+alpha-CROWN optimizable variables initialized.
+initial CROWNNNN bounds: tensor([[0.4936]], device='cuda:0') None
+best_l after optimization: -0.49360474944114685 with beta sum per layer: []
+alpha/beta optimization time: 3.4540905952453613
+initial alpha-CROWN bounds: tensor([[0.4936]], device='cuda:0', grad_fn=<AsStridedBackward>) None
+{0: '/8', 1: '/10'}
+global_lb tensor([[0.4936]], device='cuda:0')
+INIT domain SortedList([	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.49360474944114685
+	History:
+	[[[], []], [[], []]]
+	Split History:
+	None
+])
+layer 0 size torch.Size([3]) unstable 2
+layer 1 size torch.Size([5]) unstable 1
+-----------------
+# of unstable neurons: 3
+-----------------
+
+visualizing internal state
+BoundRelu()
+BoundRelu()
+In Pick_out_batch, dfs_percent:0
+domains:SortedList([	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.49360474944114685
+	History:
+	[[[], []], [[], []]]
+	Split History:
+	None
+])
+Original mask [tensor([[1., 0., 1.]], device='cuda:0'), tensor([[0., 0., 0., 0., 1.]], device='cuda:0')]
+branching decision [[0, 2]]
+splitting decisions: [[0, 2]]
+--------------------------
+Computing lower bound for
+Split:{'decision': [[[0, 2]]], 'coeffs': [[1.0]], 'diving': 0}
+Using single node split
+BoundRelu()
+S matrix location
+ tensor([[2],
+        [2]], device='cuda:0') torch.Size([2, 1])
+S matrix
+ tensor([[ 1.],
+        [-1.]]) torch.Size([2, 1])
+BoundRelu()
+S matrix location
+ tensor([], device='cuda:0', size=(2, 0), dtype=torch.int64) torch.Size([2, 0])
+S matrix
+ tensor([], size=(2, 0)) torch.Size([2, 0])
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[0.],
+        [0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 5])
+sparse beta:
+ tensor([], device='cuda:0', size=(2, 0), requires_grad=True)
+sparse beta sign
+ tensor([], device='cuda:0', size=(2, 0))
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 2, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.]], device='cuda:0')
+best_l after optimization: -0.9955824613571167 with beta sum per layer: [0.0, 0.0]
+alpha/beta optimization time: 0.5210108757019043
+In get_candidate_parallel
+layer.inputs [<function LiRPAConvNet.transfer_to_cpu.<locals>.<lambda> at 0x7fd5fae52320>]
+In get_candidate_parallel
+layer.inputs [<function LiRPAConvNet.transfer_to_cpu.<locals>.<lambda> at 0x7fd5fae5a0e0>]
+This batch time : update_bounds func: 0.5254	 prepare: 0.0029	 bound: 0.5213	 transfer: 0.0008	 finalize: 0.0004
+Accumulated time: update_bounds func: 0.5254	 prepare: 0.0029	 bound: 0.5213	 transfer: 0.0008	 finalize: 0.0004
+batch bounding time:  0.5255115032196045
+Lower bound of this batch:
+[[tensor([[-0.3843,  0.3664,  0.0000]]), tensor([[ 0.3083,  0.1847, -0.1577, -0.3688, -0.0665]]), tensor([[0.4936]])], [tensor([[-0.3843,  0.3664, -0.2117]]), tensor([[ 0.3083,  0.1847, -0.1577, -0.3688, -0.0665]]), tensor([[0.5020]])]]
+In Add domain parallel
+Before:
+SortedList([])
+After
+SortedList([	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.49360477924346924
+	History:
+	[[[2], [1.0]], [[], []]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5019776821136475
+	History:
+	[[[2], [-1.0]], [[], []]]
+	Split History:
+	{}
+])
+Current worst splitting domains [lb, ub] (depth):
+[0.49360, 99.493607] (1), [0.50198, 99.493607] (1), 
+length of domains: 2
+Total time: 0.5504	 pickout: 0.0010	 decision: 0.0199	 get_bound: 0.5276	 add_domain: 0.0002
+Current lb:0.49360477924346924
+2 neurons visited
+Global ub: tensor([[99.4936]], device='cuda:0'), batch ub: inf
+Cumulative time: 4.51913857460022
+
+visualizing internal state
+BoundRelu()
+BoundRelu()
+In Pick_out_batch, dfs_percent:0
+domains:SortedList([	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.49360477924346924
+	History:
+	[[[2], [1.0]], [[], []]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5019776821136475
+	History:
+	[[[2], [-1.0]], [[], []]]
+	Split History:
+	{}
+])
+Original mask [tensor([[1., 0., 0.],
+        [1., 0., 0.]], device='cuda:0'), tensor([[0., 0., 0., 0., 1.],
+        [0., 0., 0., 0., 1.]], device='cuda:0')]
+branching decision [[1, 4], [1, 4]]
+splitting decisions: [[1, 4], [1, 4]]
+--------------------------
+Computing lower bound for
+Split:{'decision': [[[1, 4]], [[1, 4]]], 'coeffs': [[1.0], [1.0]], 'diving': 0}
+Using single node split
+BoundRelu()
+S matrix location
+ tensor([[2],
+        [2],
+        [2],
+        [2]], device='cuda:0') torch.Size([4, 1])
+S matrix
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]]) torch.Size([4, 1])
+BoundRelu()
+S matrix location
+ tensor([[4],
+        [4],
+        [4],
+        [4]], device='cuda:0') torch.Size([4, 1])
+S matrix
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]]) torch.Size([4, 1])
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[0.],
+        [0.],
+        [0.],
+        [0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[0.],
+        [0.],
+        [0.],
+        [0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.0500],
+        [0.0500]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.0990],
+        [0.0990]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.1470],
+        [0.1470]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.1941],
+        [0.1941]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.2402],
+        [0.2402]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.2854],
+        [0.2854]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.3297],
+        [0.3297]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.3731],
+        [0.3731]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.4156],
+        [0.4156]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.4573],
+        [0.4573]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.4982],
+        [0.4982]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.5382],
+        [0.5382]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.5774],
+        [0.5615]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.6159],
+        [0.5727]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.6536],
+        [0.5750]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.6841],
+        [0.5705]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.7084],
+        [0.5609]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.7272],
+        [0.5471]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.7414],
+        [0.5302]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 4, 3])
+sparse beta:
+ tensor([[-0.],
+        [-0.],
+        [-0.],
+        [-0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [-1.],
+        [ 1.],
+        [-1.]], device='cuda:0')
+best_l after optimization: -2.043488025665283 with beta sum per layer: [0.0, 1.1460695266723633]
+alpha/beta optimization time: 0.3905196189880371
+In get_candidate_parallel
+layer.inputs [<function LiRPAConvNet.transfer_to_cpu.<locals>.<lambda> at 0x7fd5f1ac59e0>]
+In get_candidate_parallel
+layer.inputs [<function LiRPAConvNet.transfer_to_cpu.<locals>.<lambda> at 0x7fd5f1acda70>]
+This batch time : update_bounds func: 0.3971	 prepare: 0.0042	 bound: 0.3909	 transfer: 0.0007	 finalize: 0.0013
+Accumulated time: update_bounds func: 0.9225	 prepare: 0.0071	 bound: 0.9122	 transfer: 0.0007	 finalize: 0.0017
+batch bounding time:  0.39724040031433105
+Lower bound of this batch:
+[[tensor([[-0.3843,  0.3664,  0.0000]]), tensor([[ 0.3083,  0.1847, -0.1577, -0.3688,  0.0000]]), tensor([[0.4948]])], [tensor([[-0.3843,  0.3664, -0.2117]]), tensor([[ 0.3083,  0.1847, -0.1577, -0.3688,  0.0000]]), tensor([[0.5024]])], [tensor([[-0.3843,  0.3664,  0.0000]]), tensor([[ 0.3083,  0.1847, -0.1577, -0.3688, -0.0665]]), tensor([[0.5178]])], [tensor([[-0.3843,  0.3664, -0.2117]]), tensor([[ 0.3083,  0.1847, -0.1577, -0.3688, -0.0665]]), tensor([[0.5284]])]]
+In Add domain parallel
+Before:
+SortedList([])
+After
+SortedList([	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.4948462247848511
+	History:
+	[[[2], [1.0]], [[4], [1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5024221539497375
+	History:
+	[[[2], [-1.0]], [[4], [1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5177736282348633
+	History:
+	[[[2], [1.0]], [[4], [-1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5284458994865417
+	History:
+	[[[2], [-1.0]], [[4], [-1.0]]]
+	Split History:
+	{}
+])
+Current worst splitting domains [lb, ub] (depth):
+[0.49485, 99.493607] (2), [0.50242, 99.493607] (2), [0.51777, 99.493607] (2), [0.52845, 99.493607] (2), 
+length of domains: 4
+Total time: 0.4253	 pickout: 0.0011	 decision: 0.0205	 get_bound: 0.4015	 add_domain: 0.0003
+Current lb:0.4948462247848511
+6 neurons visited
+Global ub: 99.49360656738281, batch ub: inf
+Cumulative time: 4.9445905685424805
+
+visualizing internal state
+BoundRelu()
+BoundRelu()
+In Pick_out_batch, dfs_percent:0
+domains:SortedList([	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.4948462247848511
+	History:
+	[[[2], [1.0]], [[4], [1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5024221539497375
+	History:
+	[[[2], [-1.0]], [[4], [1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5177736282348633
+	History:
+	[[[2], [1.0]], [[4], [-1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5284458994865417
+	History:
+	[[[2], [-1.0]], [[4], [-1.0]]]
+	Split History:
+	{}
+])
+Original mask [tensor([[1., 0., 0.],
+        [1., 0., 0.],
+        [1., 0., 0.],
+        [1., 0., 0.]], device='cuda:0'), tensor([[0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.]], device='cuda:0')]
+branching decision [[0, 0], [0, 0], [0, 0], [0, 0]]
+splitting decisions: [[0, 0], [0, 0], [0, 0], [0, 0]]
+--------------------------
+Computing lower bound for
+Split:{'decision': [[[0, 0]], [[0, 0]], [[0, 0]], [[0, 0]]], 'coeffs': [[1.0], [1.0], [1.0], [1.0]], 'diving': 0}
+Using single node split
+BoundRelu()
+S matrix location
+ tensor([[2, 0],
+        [2, 0],
+        [2, 0],
+        [2, 0],
+        [2, 0],
+        [2, 0],
+        [2, 0],
+        [2, 0]], device='cuda:0') torch.Size([8, 2])
+S matrix
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]]) torch.Size([8, 2])
+BoundRelu()
+S matrix location
+ tensor([[4],
+        [4],
+        [4],
+        [4],
+        [4],
+        [4],
+        [4],
+        [4]], device='cuda:0') torch.Size([8, 1])
+S matrix
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]]) torch.Size([8, 1])
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[0.0000],
+        [0.0000],
+        [0.6159],
+        [0.5302],
+        [0.0000],
+        [0.0000],
+        [0.6159],
+        [0.5302]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[0., 0.],
+        [0., 0.],
+        [-0., 0.],
+        [-0., 0.],
+        [0., 0.],
+        [0., 0.],
+        [-0., 0.],
+        [-0., 0.]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.6659],
+        [0.4802],
+        [-0.0000],
+        [-0.0000],
+        [0.6659],
+        [0.4802]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[-0.0000, 0.0500],
+        [-0.0000, 0.0500],
+        [-0.0000, 0.0500],
+        [-0.0000, 0.0500],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.6855],
+        [0.4466],
+        [-0.0000],
+        [-0.0000],
+        [0.6765],
+        [0.4702]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[-0.0000, 0.0990],
+        [-0.0000, 0.0990],
+        [-0.0000, 0.0916],
+        [-0.0000, 0.0761],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.6903],
+        [0.4205],
+        [-0.0000],
+        [-0.0000],
+        [0.6702],
+        [0.4772]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[-0.0000, 0.1470],
+        [-0.0000, 0.1470],
+        [-0.0000, 0.1301],
+        [-0.0000, 0.0905],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.6861],
+        [0.3989],
+        [-0.0000],
+        [-0.0000],
+        [0.6546],
+        [0.4935]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[-0.0000, 0.1941],
+        [-0.0000, 0.1941],
+        [-0.0000, 0.1670],
+        [-0.0000, 0.0973],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.6758],
+        [0.3805],
+        [-0.0000],
+        [-0.0000],
+        [0.6331],
+        [0.5156]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[-0.0000, 0.2372],
+        [-0.0000, 0.2402],
+        [-0.0000, 0.2029],
+        [-0.0000, 0.0988],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.6611],
+        [0.3645],
+        [-0.0000],
+        [-0.0000],
+        [0.6078],
+        [0.5414]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[-0.0000, 0.2775],
+        [-0.0000, 0.2854],
+        [-0.0000, 0.2380],
+        [-0.0000, 0.0962],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.6431],
+        [0.3503],
+        [-0.0000],
+        [-0.0000],
+        [0.6013],
+        [0.5486]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[-0.0000, 0.3155],
+        [-0.0000, 0.3151],
+        [-0.0000, 0.2724],
+        [-0.0000, 0.0905],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.6269],
+        [0.3376],
+        [-0.0000],
+        [-0.0000],
+        [0.6064],
+        [0.5441]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[0.0008, 0.3518],
+        [-0.0000, 0.3332],
+        [-0.0000, 0.2958],
+        [-0.0000, 0.0821],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.6123],
+        [0.3261],
+        [-0.0000],
+        [-0.0000],
+        [0.6192],
+        [0.5319]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[0.0111, 0.3799],
+        [-0.0000, 0.3423],
+        [0.0046, 0.3104],
+        [-0.0000, 0.0718],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.5989],
+        [0.3276],
+        [-0.0000],
+        [-0.0000],
+        [0.6374],
+        [0.5142]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[0.0279, 0.4014],
+        [-0.0000, 0.3444],
+        [0.0179, 0.3180],
+        [-0.0000, 0.0667],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.5866],
+        [0.3376],
+        [-0.0000],
+        [-0.0000],
+        [0.6488],
+        [0.5034]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[0.0491, 0.4172],
+        [-0.0000, 0.3410],
+        [0.0372, 0.3199],
+        [-0.0000, 0.0660],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.5753],
+        [0.3536],
+        [-0.0000],
+        [-0.0000],
+        [0.6545],
+        [0.4982]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[0.0736, 0.4282],
+        [-0.0000, 0.3331],
+        [0.0604, 0.3172],
+        [-0.0000, 0.0689],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.5608],
+        [0.3674],
+        [-0.0000],
+        [-0.0000],
+        [0.6556],
+        [0.4977]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[0.1004, 0.4352],
+        [-0.0000, 0.3216],
+        [0.0785, 0.3186],
+        [-0.0000, 0.0687],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.5439],
+        [0.3794],
+        [-0.0000],
+        [-0.0000],
+        [0.6528],
+        [0.5011]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[0.1289, 0.4387],
+        [-0.0000, 0.3073],
+        [0.0921, 0.3234],
+        [-0.0000, 0.0658],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.5249],
+        [0.3897],
+        [-0.0000],
+        [-0.0000],
+        [0.6467],
+        [0.5078]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[0.1586, 0.4392],
+        [-0.0000, 0.2906],
+        [0.1018, 0.3311],
+        [-0.0000, 0.0607],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.5044],
+        [0.3986],
+        [-0.0000],
+        [-0.0000],
+        [0.6378],
+        [0.5171]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[0.1891, 0.4372],
+        [-0.0000, 0.2721],
+        [0.1082, 0.3413],
+        [-0.0000, 0.0536],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.4826],
+        [0.4063],
+        [-0.0000],
+        [-0.0000],
+        [0.6267],
+        [0.5287]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[0.2145, 0.4376],
+        [-0.0000, 0.2520],
+        [0.1117, 0.3535],
+        [-0.0000, 0.0448],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.4598],
+        [0.4193],
+        [-0.0000],
+        [-0.0000],
+        [0.6230],
+        [0.5330]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[0.2354, 0.4401],
+        [-0.0000, 0.2396],
+        [0.1126, 0.3674],
+        [-0.0000, 0.0402],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 5])
+sparse beta:
+ tensor([[-0.0000],
+        [-0.0000],
+        [0.4362],
+        [0.4364],
+        [-0.0000],
+        [-0.0000],
+        [0.6252],
+        [0.5313]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.],
+        [ 1.],
+        [-1.],
+        [-1.],
+        [ 1.],
+        [ 1.],
+        [-1.],
+        [-1.]], device='cuda:0')
+Somewhere deep inside bound_backward...
+A.shape torch.Size([1, 8, 3])
+sparse beta:
+ tensor([[0.2524, 0.4445],
+        [-0.0000, 0.2333],
+        [0.1114, 0.3826],
+        [-0.0000, 0.0391],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000],
+        [-0.0000, -0.0000]], device='cuda:0', requires_grad=True)
+sparse beta sign
+ tensor([[ 1.,  1.],
+        [-1.,  1.],
+        [ 1.,  1.],
+        [-1.,  1.],
+        [ 1., -1.],
+        [-1., -1.],
+        [ 1., -1.],
+        [-1., -1.]], device='cuda:0')
+best_l after optimization: -4.169711112976074 with beta sum per layer: [1.3724030256271362, 2.1218719482421875]
+alpha/beta optimization time: 0.5211710929870605
+In get_candidate_parallel
+layer.inputs [<function LiRPAConvNet.transfer_to_cpu.<locals>.<lambda> at 0x7fd5f1ac88c0>]
+In get_candidate_parallel
+layer.inputs [<function LiRPAConvNet.transfer_to_cpu.<locals>.<lambda> at 0x7fd5f1ac8680>]
+This batch time : update_bounds func: 0.5295	 prepare: 0.0065	 bound: 0.5215	 transfer: 0.0006	 finalize: 0.0008
+Accumulated time: update_bounds func: 1.4520	 prepare: 0.0136	 bound: 1.4337	 transfer: 0.0006	 finalize: 0.0024
+batch bounding time:  0.5296337604522705
+Lower bound of this batch:
+[[tensor([[0.0000, 0.3664, 0.0000]]), tensor([[ 0.3083,  0.1847, -0.1577, -0.3688,  0.0000]]), tensor([[0.5430]])], [tensor([[ 0.0000,  0.3664, -0.2117]]), tensor([[ 0.3083,  0.1847, -0.1577, -0.3688,  0.0000]]), tensor([[0.5171]])], [tensor([[0.0000, 0.3664, 0.0000]]), tensor([[ 0.3083,  0.1847, -0.1577, -0.3688, -0.0665]]), tensor([[0.5372]])], [tensor([[ 0.0000,  0.3664, -0.2117]]), tensor([[ 0.3083,  0.1847, -0.1577, -0.3688, -0.0665]]), tensor([[0.5284]])], [tensor([[-0.3843,  0.3664,  0.0000]]), tensor([[ 0.3083,  0.1847, -0.1577, -0.3688,  0.0000]]), tensor([[0.4948]])], [tensor([[-0.3843,  0.3664, -0.2117]]), tensor([[ 0.3083,  0.1847, -0.1577, -0.3688,  0.0000]]), tensor([[0.5024]])], [tensor([[-0.3843,  0.3664,  0.0000]]), tensor([[ 0.3083,  0.1847, -0.1577, -0.3688, -0.0665]]), tensor([[0.5181]])], [tensor([[-0.3843,  0.3664, -0.2117]]), tensor([[ 0.3083,  0.1847, -0.1577, -0.3688, -0.0665]]), tensor([[0.5285]])]]
+In Add domain parallel
+Before:
+SortedList([])
+After
+SortedList([	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.4948462247848511
+	History:
+	[[[2, 0], [1.0, -1.0]], [[4], [1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5024221539497375
+	History:
+	[[[2, 0], [-1.0, -1.0]], [[4], [1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5171457529067993
+	History:
+	[[[2, 0], [-1.0, 1.0]], [[4], [1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5180979371070862
+	History:
+	[[[2, 0], [1.0, -1.0]], [[4], [-1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5284458994865417
+	History:
+	[[[2, 0], [-1.0, 1.0]], [[4], [-1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5285410284996033
+	History:
+	[[[2, 0], [-1.0, -1.0]], [[4], [-1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5371977090835571
+	History:
+	[[[2, 0], [1.0, 1.0]], [[4], [-1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5430140495300293
+	History:
+	[[[2, 0], [1.0, 1.0]], [[4], [1.0]]]
+	Split History:
+	{}
+])
+Current worst splitting domains [lb, ub] (depth):
+[0.49485, 99.493607] (3), [0.50242, 99.493607] (3), [0.51715, 99.493607] (3), [0.51810, 99.493607] (3), [0.52845, 99.493607] (3), [0.52854, 99.493607] (3), [0.53720, 99.493607] (3), [0.54301, 99.493607] (3), 
+length of domains: 8
+Total time: 0.5665	 pickout: 0.0015	 decision: 0.0242	 get_bound: 0.5380	 add_domain: 0.0006
+Current lb:0.4948462247848511
+14 neurons visited
+Global ub: 99.49360656738281, batch ub: inf
+Cumulative time: 5.511255979537964
+
+visualizing internal state
+BoundRelu()
+BoundRelu()
+In Pick_out_batch, dfs_percent:0
+domains:SortedList([	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.4948462247848511
+	History:
+	[[[2, 0], [1.0, -1.0]], [[4], [1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5024221539497375
+	History:
+	[[[2, 0], [-1.0, -1.0]], [[4], [1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5171457529067993
+	History:
+	[[[2, 0], [-1.0, 1.0]], [[4], [1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5180979371070862
+	History:
+	[[[2, 0], [1.0, -1.0]], [[4], [-1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5284458994865417
+	History:
+	[[[2, 0], [-1.0, 1.0]], [[4], [-1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5285410284996033
+	History:
+	[[[2, 0], [-1.0, -1.0]], [[4], [-1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5371977090835571
+	History:
+	[[[2, 0], [1.0, 1.0]], [[4], [-1.0]]]
+	Split History:
+	{}
+, 	
+=======ReLUDomain========
+	Priority:
+	0
+	Lower bound:
+	0.5430140495300293
+	History:
+	[[[2, 0], [1.0, 1.0]], [[4], [1.0]]]
+	Split History:
+	{}
+])
+Original mask [tensor([[0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.]], device='cuda:0'), tensor([[0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.]], device='cuda:0')]
+Random branching decision used for example [0, 1, 2, 3, 4, 5, 6, 7]
+branching decision []
+all nodes are split!!
+Global ub: 99.49360656738281, batch ub: inf
+(0.4948462247848511, 99.49360656738281, [[3.9676053524017334, 0.49360474944114685]], 14)
