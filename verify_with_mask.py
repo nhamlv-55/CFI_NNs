@@ -8,10 +8,14 @@ import models
 import torch
 from torchvision import datasets, transforms
 from torchsummary import summary
+from matplotlib import pyplot as plt
+import numpy as np
+import json
 
 LOADPATH = 'MNIST_toy/FFN18_28_21'
 DUMMY_TARGET = torch.empty((1, 28, 28))
-
+NP_FILE_PATH="np_for_"
+IMAGE_FILE_PATH="an_image_for_"
 use_cuda = True
 batch_size = 32
 test_batch_size = 32
@@ -34,15 +38,16 @@ dataset2 = datasets.MNIST('data', train=False,
                           transform=transform)
 test_loader = torch.utils.data.DataLoader(dataset2, **test_kwargs)
 
-LOADED = False
+LOADED = True
+
 
 class LinearModel(torch.nn.Module):
     def __init__(self, n_output):
         super().__init__()
         self.flatten = torch.nn.Flatten()
-        self.fc0 = torch.nn.Linear(4, 3)
-        self.fc1 = torch.nn.Linear(3, 5)
-        self.fc2 = torch.nn.Linear(5, n_output)
+        self.fc0 = torch.nn.Linear(4, 8)
+        self.fc1 = torch.nn.Linear(8, 16)
+        self.fc2 = torch.nn.Linear(16, n_output)
         self.relu = torch.nn.ReLU()
 
     def forward(self, x):
@@ -51,12 +56,55 @@ class LinearModel(torch.nn.Module):
         out = self.relu(self.fc1(out))
         out = self.fc2(out)
         return out
- 
-def verify(data_loader):
+
+
+def get_some_images(data_loader):
+    for label in range(10):
+        while True:
+            x, _ = next(iter(data_loader))
+            x = x[0]
+
+            y = _[0].item()
+            print(y)
+            if y == label:
+                xnp = x.numpy()
+                np.save("{}{}.npy".format(NP_FILE_PATH,y), xnp)
+                plt.imshow(xnp.reshape(28,28))
+                plt.savefig("{}{}.png".format(IMAGE_FILE_PATH, y))                     
+                break
+
+    return
+
+def get_fixed_relu_mask(label, eps, file):
+    network = {'fc1': 256, 'fc2': 128, 'fc3': 64, 'fc4': 10}
+
+    results = [[[],[]],
+                [[],[]],
+                [[],[]],
+                [[],[]]]
+    with open(file, "r") as f:
+        raw_mask = json.load(f)
+    mask = raw_mask[eps][label]
+    for counter, stable_idx in enumerate(mask["stable_idx"]):
+        if stable_idx < 256:
+            results[0][0].append(stable_idx)
+
+            results[0][1].append(1 if mask["alpha_pattern"][counter] else -1)
+        elif stable_idx>=256 and stable_idx<256+128:
+            results[1][0].append(stable_idx - 256)
+            results[1][1].append(1 if mask["alpha_pattern"][counter] else -1)
+        elif stable_idx>=256+128 and stable_idx < 256 + 128 + 64:
+            results[2][0].append(stable_idx - 256 - 128)
+            results[2][1].append(1 if mask["alpha_pattern"][counter] else -1)
+
+    print(results)
+    return results
+
+def verify():
     eps = arguments.Config["specification"]["epsilon"]
     device = torch.device('cuda')
 
-    if LOADED: #verifying MNIST. Not interesting for now.
+    if LOADED:  # verifying MNIST. Not interesting for now.
         N_OUTPUT = 10
         model = models.FeedforwardNeuralNetModel(28*28, 128, 10)
         model.load_state_dict(torch.load(LOADPATH,
@@ -64,14 +112,11 @@ def verify(data_loader):
         model.to(device)
         summary(model, (1, 28, 28))
 
-        x, _ = next(iter(data_loader))
-        x = x[0]
+        y = 0
+        test = 1
+        x = torch.from_numpy(np.load("{}{}.npy".format(NP_FILE_PATH, y))).to(device)
 
-        y = _[0].item()
-        print(y)
-
-        test = (y+1) % N_OUTPUT
-        print("Trying to verify that the network will never predict {}".format(test))
+        print("Trying to verify that the network will never predict {} upon seeing {}".format(test, y))
 
         # assert 10 > 1
         # we only support c with shape of (1, 1, n)
@@ -79,8 +124,15 @@ def verify(data_loader):
         c[0, 0, y] = 1
         c[0, 0, test] = -1
 
+        """setup the fixed relu split"""
+        fixed_relu_mask = [[[1], [-1]],
+                           [[0, 3, 5, 2], [1, -1, 1, -1]],
+                           [[], []], #empty
+                           [[], []]] #empty
+        fixed_relu_mask = get_fixed_relu_mask(str(y), "0.0005", "MNIST_toy/relu_exp_data16:20:05.json")
+        # return
         wrapped_model = LiRPAConvNet(
-            model, pred=y, test=None, in_size=(1, 28, 28), device='cuda', c=c)
+            model, pred=y, test=None, in_size=(1, 28, 28), device='cuda', c=c, fixed_relu_mask=fixed_relu_mask)
         data_ub = x + eps
         data_lb = x - eps
 
@@ -103,26 +155,36 @@ def verify(data_loader):
 
         print(res)
 
-    else: #verifying a super small network. Much better to understand things
-        N_OUTPUT = 4
+    else:  # verifying a super small network. Much better to understand things
+        N_OUTPUT = 10
         model = LinearModel(N_OUTPUT)
         model.to(device)
+
+        """ Nham: uncomment to generate a new model and input"""
+        # torch.save(model.state_dict(), "model_for_study_ABC.pt")
+        # x = (torch.rand((1, 4)) - 0.5).to(device)
+        model.load_state_dict(torch.load("model_for_study_ABC.pt"))
+
         summary(model, (1, 4))
 
-        x = (torch.rand((1, 4)) - 0.5).to(device)
+        x = torch.tensor([[0.3144, -0.4164, -0.1399, -0.3196]]).to(device)
         print("X", x)
-        print(model(x))
         y = torch.argmax(model(x)[0]).cpu().item()
 
-        test = (y+1)%N_OUTPUT
+        test = (y+1) % N_OUTPUT
 
         print("Trying to verify that the network will never predict {} upon seeing {}".format(test, y))
         c = torch.zeros((1, 1, N_OUTPUT), device=device)
         c[0, 0, y] = 1
         c[0, 0, test] = -1
         print("C", c)
+
+        """setup the fixed relu split"""
+        fixed_relu_mask = [[[0, 3, 5, 2], [1, -1, 1, -1]],
+                            [[1,4], [1, -1]]]
+
         wrapped_model = LiRPAConvNet(
-            model, pred=y, test=None, in_size=(1, 4), device='cuda', c=c)
+            model, pred=y, test=None, in_size=(1, 4), device='cuda', c=c, fixed_relu_mask=fixed_relu_mask)
         data_ub = x + eps
         data_lb = x - eps
 
@@ -139,6 +201,7 @@ def verify(data_loader):
 
         print(res)
 
+
 if __name__ == "__main__":
     config_args()
-    verify(test_loader)
+    verify()
