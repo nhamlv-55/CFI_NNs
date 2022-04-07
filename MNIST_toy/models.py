@@ -162,7 +162,7 @@ class FeedforwardNeuralNetModel(BaseNet):
         out = F.relu(self.fc2(out))
         out = F.relu(self.fc3(out))
         out = self.fc4(out)
-        out = F.log_softmax(out, dim=1)
+    #    out = F.log_softmax(out, dim=1)
         return out
     def model_savename(self):
         return "FFN"+datetime.now().strftime("%H-%M-%S")

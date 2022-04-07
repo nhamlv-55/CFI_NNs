@@ -8,7 +8,7 @@ import models
 import torch
 from torchvision import datasets, transforms
 from torchsummary import summary
-from matplotlib import pyplot as plt
+#from matplotlib import pyplot as plt
 import numpy as np
 import json
 
@@ -16,7 +16,7 @@ LOADPATH = 'MNIST_toy/FFN18_28_21'
 DUMMY_TARGET = torch.empty((1, 28, 28))
 NP_FILE_PATH="np_for_"
 IMAGE_FILE_PATH="an_image_for_"
-use_cuda = True
+use_cuda = False
 batch_size = 32
 test_batch_size = 32
 train_kwargs = {'batch_size': batch_size}
@@ -89,20 +89,29 @@ def get_fixed_relu_mask(label, eps, file):
         if stable_idx < 256:
             results[0][0].append(stable_idx)
 
-            results[0][1].append(1 if mask["alpha_pattern"][counter] else -1)
+            results[0][1].append(1.0 if mask["alpha_pattern"][counter] else -1.0)
         elif stable_idx>=256 and stable_idx<256+128:
             results[1][0].append(stable_idx - 256)
-            results[1][1].append(1 if mask["alpha_pattern"][counter] else -1)
+            results[1][1].append(1.0 if mask["alpha_pattern"][counter] else -1.0)
         elif stable_idx>=256+128 and stable_idx < 256 + 128 + 64:
             results[2][0].append(stable_idx - 256 - 128)
-            results[2][1].append(1 if mask["alpha_pattern"][counter] else -1)
+            results[2][1].append(1.0 if mask["alpha_pattern"][counter] else -1.0)
+
+
+    branching_decision = []
+    coeffs = []
+    for l_idx, layer in enumerate(results):
+        for r_idx, relu in enumerate(layer[0]):
+            branching_decision.append([l_idx, relu])
+            coeffs.append([layer[1][r_idx]])
+
 
     print(results)
-    return results
+    return {"decision": branching_decision, "coeffs": coeffs}
 
-def verify():
+def verify(y, test, should_fix_relu):
     eps = arguments.Config["specification"]["epsilon"]
-    device = torch.device('cuda')
+    device = torch.device('cpu')
 
     if LOADED:  # verifying MNIST. Not interesting for now.
         N_OUTPUT = 10
@@ -112,8 +121,6 @@ def verify():
         model.to(device)
         summary(model, (1, 28, 28))
 
-        y = 0
-        test = 1
         x = torch.from_numpy(np.load("{}{}.npy".format(NP_FILE_PATH, y))).to(device)
 
         print("Trying to verify that the network will never predict {} upon seeing {}".format(test, y))
@@ -125,14 +132,13 @@ def verify():
         c[0, 0, test] = -1
 
         """setup the fixed relu split"""
-        fixed_relu_mask = [[[1], [-1]],
-                           [[0, 3, 5, 2], [1, -1, 1, -1]],
-                           [[], []], #empty
-                           [[], []]] #empty
-        fixed_relu_mask = get_fixed_relu_mask(str(y), "0.0005", "MNIST_toy/relu_exp_data16:20:05.json")
+        if should_fix_relu:
+            fixed_relu_mask = get_fixed_relu_mask(str(y), "0.0005", "MNIST_toy/relu_exp_data16-06-03.json")
+        else:
+            fixed_relu_mask = None
         # return
         wrapped_model = LiRPAConvNet(
-            model, pred=y, test=None, in_size=(1, 28, 28), device='cuda', c=c, fixed_relu_mask=fixed_relu_mask)
+            model, pred=y, test=None, in_size=(1, 28, 28), device='cpu', c=c, fixed_relu_mask=fixed_relu_mask)
         data_ub = x + eps
         data_lb = x - eps
 
@@ -148,12 +154,17 @@ def verify():
         print(x.shape)
         x = auto_LiRPA.BoundedTensor(x, ball)
         domain = torch.stack(
-            [data_lb.squeeze(0), data_ub.squeeze(0)], dim=-1).unsqueeze(0).cuda()
+            [data_lb.squeeze(0), data_ub.squeeze(0)], dim=-1).unsqueeze(0)
         print("domain", domain.shape)
 
         res = relu_bab_parallel(wrapped_model, x=x, domain=domain)
 
         print(res)
+        lower_bound = res[0]
+        solving_time = res[-1]
+        with open("results.csv", 'a') as f:
+            f.writelines(["{},{},{},{},{},{}\n".format(should_fix_relu, y, test, eps, solving_time, lower_bound)])
+
 
     else:  # verifying a super small network. Much better to understand things
         N_OUTPUT = 10
@@ -184,7 +195,7 @@ def verify():
                             [[1,4], [1, -1]]]
 
         wrapped_model = LiRPAConvNet(
-            model, pred=y, test=None, in_size=(1, 4), device='cuda', c=c, fixed_relu_mask=fixed_relu_mask)
+            model, pred=y, test=None, in_size=(1, 4), device='cpu', c=c, fixed_relu_mask=fixed_relu_mask)
         data_ub = x + eps
         data_lb = x - eps
 
@@ -194,14 +205,22 @@ def verify():
         x = x.unsqueeze(0).to(device)
         x = auto_LiRPA.BoundedTensor(x, ball)
         domain = torch.stack(
-            [data_lb.squeeze(0), data_ub.squeeze(0)], dim=-1).unsqueeze(0).cuda()
+            [data_lb.squeeze(0), data_ub.squeeze(0)], dim=-1).unsqueeze(0)
         print("domain", domain.shape)
 
         res = relu_bab_parallel(wrapped_model, x=x, domain=domain)
 
         print(res)
 
+        lower_bound = res[0]
+        solving_time = res[-1]
+        with open("results.csv", 'a') as f:
+            f.writelines(["{},{},{},{},{},{}\n".format(should_fix_relu, y, test, eps, solving_time, lower_bound)])
 
 if __name__ == "__main__":
     config_args()
-    verify()
+    for i in range(1, 10):
+        for j in range(10):
+            if i!=j:
+                verify(i, j, should_fix_relu=True)
+                verify(i, j, should_fix_relu=False)
